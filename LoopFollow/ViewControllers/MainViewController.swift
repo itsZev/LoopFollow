@@ -663,6 +663,11 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
             Storage.shared.migrateStep8()
             Storage.shared.migrationStep.value = 8
         }
+
+        if Storage.shared.migrationStep.value < 9 {
+            Storage.shared.migrateStep9()
+            Storage.shared.migrationStep.value = 9
+        }
     }
 
     @objc func appDidBecomeActive() {
