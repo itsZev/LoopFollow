@@ -247,10 +247,10 @@ final class LiveActivityManager {
         let renewBy = Storage.shared.laRenewBy.value
         let now = Date().timeIntervalSince1970
         let overlayIsShowing = renewBy > 0 && now >= renewBy - LiveActivityManager.renewalWarning
-        let appState = UIApplication.shared.applicationState.rawValue
-        let existing = Activity<GlucoseLiveActivityAttributes>.activities.count
         let stuckSends = pushToStartSendsWithoutAdoption
         let pushToStartLooksStuck = stuckSends >= LiveActivityManager.pushToStartForceRestartThreshold
+        let appState = UIApplication.shared.applicationState.rawValue
+        let existing = Activity<GlucoseLiveActivityAttributes>.activities.count
 
         LogManager.shared.log(
             category: .general,
