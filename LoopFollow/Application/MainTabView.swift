@@ -15,6 +15,7 @@ struct MainTabView: View {
     @ObservedObject private var treatmentsPosition = Storage.shared.treatmentsPosition
 
     @State private var showTelemetryConsent = false
+    @State private var showOnboarding = false
 
     private var orderedItems: [TabItem] {
         Storage.shared.orderedTabBarItems()
@@ -47,18 +48,35 @@ struct MainTabView: View {
             // onAppear (not app launch) keeps it off the BG-only refresh path.
             MainViewController.bootstrap()
 
-            // One-time consent prompt. Previously presented by SceneDelegate,
-            // which was removed in the storyboard→SwiftUI migration; without
-            // this, fresh installs stay permanently undecided and telemetry
-            // never sends. The storage flag keeps it to a single appearance.
-            if !Storage.shared.telemetryConsentDecisionMade.value {
-                showTelemetryConsent = true
+            // Show the first-run onboarding once for everyone. Returning users
+            // get a prominent Skip on the welcome screen. The telemetry consent
+            // prompt is deferred until onboarding is dismissed so the two never
+            // appear on top of one another.
+            if !Storage.shared.hasCompletedOnboarding.value {
+                showOnboarding = true
+            } else {
+                presentTelemetryConsentIfNeeded()
             }
+        }
+        .fullScreenCover(isPresented: $showOnboarding, onDismiss: {
+            presentTelemetryConsentIfNeeded()
+        }) {
+            OnboardingContainerView(onClose: { showOnboarding = false })
         }
         .sheet(isPresented: $showTelemetryConsent) {
             // User must explicitly choose — no swipe-to-dismiss.
             TelemetryConsentView()
                 .interactiveDismissDisabled(true)
+        }
+    }
+
+    // One-time telemetry consent prompt. Previously presented by SceneDelegate,
+    // which was removed in the storyboard→SwiftUI migration; without this, fresh
+    // installs stay permanently undecided and telemetry never sends. The storage
+    // flag keeps it to a single appearance.
+    private func presentTelemetryConsentIfNeeded() {
+        if !Storage.shared.telemetryConsentDecisionMade.value {
+            showTelemetryConsent = true
         }
     }
 
