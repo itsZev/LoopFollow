@@ -78,6 +78,15 @@ final class OnboardingViewModel: ObservableObject {
         }
     }
 
+    /// Whether a seeded alarm should be offered. Device/system alarms (Not
+    /// Looping, Low Battery, …) rely on loop and uploader data that only a
+    /// Nightscout site provides, so they're hidden for a Dexcom-only follower who
+    /// has no such data. Other groups are always offered.
+    func isSeedAlarmOffered(_ type: AlarmType) -> Bool {
+        guard type.group == .device else { return true }
+        return dataSource == .nightscout || !Storage.shared.url.value.isEmpty
+    }
+
     /// Progress fraction (0...1) across the chrome'd steps, for the progress bar.
     var progress: Double {
         let total = Double(OnboardingStep.allCases.count - 1)
@@ -123,7 +132,7 @@ final class OnboardingViewModel: ObservableObject {
         var alarms = Storage.shared.alarms.value
         let existingTypes = Set(alarms.map(\.type))
 
-        for seed in seedAlarms where seed.isEnabled {
+        for seed in seedAlarms where seed.isEnabled && isSeedAlarmOffered(seed.type) {
             guard !existingTypes.contains(seed.type) else { continue }
             alarms.append(seed.alarm)
         }

@@ -24,21 +24,23 @@ struct AlarmsStepView: View {
 
             Section {
                 ForEach($viewModel.seedAlarms) { $seed in
-                    Toggle(isOn: $seed.isEnabled) {
-                        Label {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(meta(for: seed.type).title)
-                                Text(meta(for: seed.type).detail)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                    if viewModel.isSeedAlarmOffered(seed.type) {
+                        Toggle(isOn: $seed.isEnabled) {
+                            Label {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(meta(for: seed.type).title)
+                                    Text(meta(for: seed.type).detail)
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            } icon: {
+                                Image(systemName: meta(for: seed.type).icon)
                             }
-                        } icon: {
-                            Image(systemName: meta(for: seed.type).icon)
                         }
-                    }
 
-                    if seed.isEnabled {
-                        control(for: $seed)
+                        if seed.isEnabled {
+                            control(for: $seed)
+                        }
                     }
                 }
             } footer: {
