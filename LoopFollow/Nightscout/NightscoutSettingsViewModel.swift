@@ -3,6 +3,7 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 class NightscoutSettingsViewModel: ObservableObject {
     private var initialURL: String
@@ -34,6 +35,29 @@ class NightscoutSettingsViewModel: ObservableObject {
 
     @Published var nightscoutStatus: String = "Checking..."
 
+    @Published var webSocketEnabled: Bool = Storage.shared.webSocketEnabled.value {
+        didSet {
+            Storage.shared.webSocketEnabled.value = webSocketEnabled
+            if webSocketEnabled {
+                NightscoutSocketManager.shared.connectIfNeeded()
+            } else {
+                NightscoutSocketManager.shared.disconnect()
+                triggerRefresh()
+            }
+        }
+    }
+
+    @Published var webSocketStatus: String = "Disconnected"
+
+    var webSocketStatusColor: Color {
+        switch NightscoutSocketManager.shared.connectionState {
+        case .authenticated: return .green
+        case .connecting, .connected: return .orange
+        case .disconnected: return .secondary
+        case .error: return .red
+        }
+    }
+
     private var cancellables = Set<AnyCancellable>()
     private var checkStatusSubject = PassthroughSubject<Void, Never>()
     private var checkStatusWorkItem: DispatchWorkItem?
@@ -45,6 +69,7 @@ class NightscoutSettingsViewModel: ObservableObject {
 
         setupDebounce()
         checkNightscoutStatus()
+        observeWebSocketState()
     }
 
     private func setupDebounce() {
@@ -125,6 +150,7 @@ class NightscoutSettingsViewModel: ObservableObject {
             case .emptyAddress:
                 nightscoutStatus = "Address Empty"
             }
+            NightscoutSocketManager.shared.disconnect()
         } else {
             isConnected = true
             let authStatus: String
@@ -139,6 +165,30 @@ class NightscoutSettingsViewModel: ObservableObject {
             if nightscoutURL != initialURL || nightscoutToken != initialToken {
                 NotificationCenter.default.post(name: NSNotification.Name("refresh"), object: nil)
             }
+        }
+    }
+
+    private func triggerRefresh() {
+        NotificationCenter.default.post(name: NSNotification.Name("refresh"), object: nil)
+    }
+
+    private func observeWebSocketState() {
+        updateWebSocketStatus()
+        NotificationCenter.default.publisher(for: .nightscoutSocketStateChanged)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateWebSocketStatus()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateWebSocketStatus() {
+        switch NightscoutSocketManager.shared.connectionState {
+        case .disconnected: webSocketStatus = "Disconnected"
+        case .connecting: webSocketStatus = "Connecting..."
+        case .connected: webSocketStatus = "Connected"
+        case .authenticated: webSocketStatus = "Connected"
+        case .error: webSocketStatus = "Error"
         }
     }
 }

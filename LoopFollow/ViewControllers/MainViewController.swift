@@ -73,6 +73,7 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
     var profileManager = ProfileManager.shared
 
     var bgData: [ShareGlucoseData] = []
+    var yesterdayBGData: [ShareGlucoseData] = [] // readings already shifted +24h for the comparison overlay
     var basalProfile: [basalProfileStruct] = []
     var basalData: [basalGraphStruct] = []
     var basalScheduleData: [basalGraphStruct] = []
@@ -246,6 +247,7 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
         showHideNSDetails()
 
         scheduleAllTasks()
+        setupNightscoutSocket()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name("refresh"), object: nil)
 
@@ -589,6 +591,7 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
 
         Observable.shared.minAgoText.value = "Refreshing"
         scheduleAllTasks()
+        NightscoutSocketManager.shared.connectIfNeeded()
 
         currentCage = nil
         currentSage = nil
@@ -620,6 +623,8 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
         if Storage.shared.backgroundRefreshType.value != .none {
             BackgroundAlertManager.shared.startBackgroundAlert()
         }
+
+        NightscoutSocketManager.shared.disconnect()
     }
 
     // Migrations must only run when UserDefaults is accessible (i.e. after first unlock).
@@ -688,6 +693,11 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
             Storage.shared.migrateStep8()
             Storage.shared.migrationStep.value = 8
         }
+
+        if Storage.shared.migrationStep.value < 9 {
+            Storage.shared.migrateStep9()
+            Storage.shared.migrationStep.value = 9
+        }
     }
 
     @objc func appDidBecomeActive() {
@@ -725,6 +735,7 @@ class MainViewController: UIViewController, ChartViewDelegate, UNUserNotificatio
         }
 
         TaskScheduler.shared.checkTasksNow()
+        NightscoutSocketManager.shared.connectIfNeeded()
 
         checkAndNotifyVersionStatus()
         checkAppExpirationStatus()

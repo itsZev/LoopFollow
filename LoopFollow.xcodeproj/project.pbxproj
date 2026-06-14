@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0E7F523C7C777DFDDFFCC2A8 /* WelcomeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5AA9246BBC5EA725658F54 /* WelcomeStepView.swift */; };
+		B500000000000000000000A2 /* RemoteBolusHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500000000000000000000A1 /* RemoteBolusHistoryEntry.swift */; };
+		B500000000000000000000A4 /* QuickPickBolusesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500000000000000000000A3 /* QuickPickBolusesManager.swift */; };
+		B500000000000000000000B2 /* RemoteMealHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500000000000000000000B1 /* RemoteMealHistoryEntry.swift */; };
+		B500000000000000000000B4 /* QuickPickMealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500000000000000000000B3 /* QuickPickMealsManager.swift */; };
 		2D8068C66833EEAED7B4BEB8 /* FutureCarbsCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAB9EECE7095238A558060 /* FutureCarbsCondition.swift */; };
 		2EADEE2EE5B46EF64ADF7348 /* NightscoutConnectStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F3C47FBF847CD6A38EF0B7 /* NightscoutConnectStepView.swift */; };
 		374A77992F5BD8B200E96858 /* APNSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374A77982F5BD8AB00E96858 /* APNSClient.swift */; };
@@ -62,6 +66,7 @@
 		6589CC6D2E9E7D1600BB18FE /* CalendarSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC582E9E7D1600BB18FE /* CalendarSettingsView.swift */; };
 		6589CC6E2E9E7D1600BB18FE /* SettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC5F2E9E7D1600BB18FE /* SettingsMenuView.swift */; };
 		6589CC6F2E9E7D1600BB18FE /* AdvancedSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC572E9E7D1600BB18FE /* AdvancedSettingsViewModel.swift */; };
+		6589CC712E9E7D1600BB18FE /* ShareLogNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC702E9E7D1600BB18FE /* ShareLogNoticeView.swift */; };
 		6589CC712E9E814F00BB18FE /* AlarmSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC702E9E814F00BB18FE /* AlarmSelectionView.swift */; };
 		6589CC752E9EAFB700BB18FE /* SettingsMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589CC742E9EAFB700BB18FE /* SettingsMigrationManager.swift */; };
 		65A100012F5AA00000AA1001 /* UnitsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A100002F5AA00000AA1001 /* UnitsSettingsView.swift */; };
@@ -115,6 +120,7 @@
 		DD16AF0D2C98485400FB655A /* SecureStorageValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD16AF0C2C98485400FB655A /* SecureStorageValue.swift */; };
 		DD16AF0F2C99592F00FB655A /* HKQuantityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD16AF0E2C99592F00FB655A /* HKQuantityInputView.swift */; };
 		DD16AF112C997B4600FB655A /* LoadingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD16AF102C997B4600FB655A /* LoadingButtonView.swift */; };
+		B500000000000000000000C2 /* QuickPickSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500000000000000000000C1 /* QuickPickSectionHeader.swift */; };
 		DD1D52B92E1EB5DC00432050 /* TabPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D52B82E1EB5DC00432050 /* TabPosition.swift */; };
 		DD1D52C02E4C100000000001 /* AppearanceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D52BF2E4C100000000001 /* AppearanceMode.swift */; };
 		DD1D52C22E4C100000000002 /* PredictionDisplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D52C12E4C100000000002 /* PredictionDisplayType.swift */; };
@@ -448,6 +454,9 @@
 		FCEF87AC24A141A700AE6FA0 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF87AA24A1417900AE6FA0 /* Localizer.swift */; };
 		FCFEEC9E2486E68E00402A7F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFEEC9D2486E68E00402A7F /* WebKit.framework */; };
 		FCFEECA02488157B00402A7F /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEEC9F2488157B00402A7F /* Chart.swift */; };
+		DD50C10A2F60A00000000001 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DD50C10A2F60A00000000003 /* SocketIO */; };
+		DD50C10A2F60B00000000002 /* NightscoutSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50C10A2F60B00000000001 /* NightscoutSocketManager.swift */; };
+		DD50C10A2F60B00000000004 /* NightscoutSocketDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50C10A2F60B00000000003 /* NightscoutSocketDataHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -482,6 +491,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B500000000000000000000A1 /* RemoteBolusHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBolusHistoryEntry.swift; sourceTree = "<group>"; };
+		B500000000000000000000A3 /* QuickPickBolusesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPickBolusesManager.swift; sourceTree = "<group>"; };
+		B500000000000000000000B1 /* RemoteMealHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMealHistoryEntry.swift; sourceTree = "<group>"; };
+		B500000000000000000000B3 /* QuickPickMealsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPickMealsManager.swift; sourceTree = "<group>"; };
 		059B0FA59AABFE72FE13DDDA /* Pods-LoopFollow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopFollow.release.xcconfig"; path = "Target Support Files/Pods-LoopFollow/Pods-LoopFollow.release.xcconfig"; sourceTree = "<group>"; };
 		0A213D72341EF2C558030E88 /* NotificationAuthorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationAuthorization.swift; sourceTree = "<group>"; };
 		17959684C89D6056922D9175 /* DataSourceChoiceStepView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DataSourceChoiceStepView.swift; sourceTree = "<group>"; };
@@ -533,6 +546,7 @@
 		6589CC5E2E9E7D1600BB18FE /* GraphSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSettingsView.swift; sourceTree = "<group>"; };
 		6589CC5F2E9E7D1600BB18FE /* SettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuView.swift; sourceTree = "<group>"; };
 		6589CC602E9E7D1600BB18FE /* TabCustomizationModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustomizationModal.swift; sourceTree = "<group>"; };
+		6589CC702E9E7D1600BB18FE /* ShareLogNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLogNoticeView.swift; sourceTree = "<group>"; };
 		6589CC702E9E814F00BB18FE /* AlarmSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSelectionView.swift; sourceTree = "<group>"; };
 		6589CC742E9EAFB700BB18FE /* SettingsMigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMigrationManager.swift; sourceTree = "<group>"; };
 		65A100002F5AA00000AA1001 /* UnitsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsSettingsView.swift; sourceTree = "<group>"; };
@@ -590,6 +604,7 @@
 		DD16AF0C2C98485400FB655A /* SecureStorageValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageValue.swift; sourceTree = "<group>"; };
 		DD16AF0E2C99592F00FB655A /* HKQuantityInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKQuantityInputView.swift; sourceTree = "<group>"; };
 		DD16AF102C997B4600FB655A /* LoadingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButtonView.swift; sourceTree = "<group>"; };
+		B500000000000000000000C1 /* QuickPickSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPickSectionHeader.swift; sourceTree = "<group>"; };
 		DD1D52B82E1EB5DC00432050 /* TabPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPosition.swift; sourceTree = "<group>"; };
 		DD1D52BF2E4C100000000001 /* AppearanceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceMode.swift; sourceTree = "<group>"; };
 		DD1D52C12E4C100000000002 /* PredictionDisplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionDisplayType.swift; sourceTree = "<group>"; };
@@ -619,6 +634,8 @@
 		DD493AE42ACF2383009A6922 /* Treatments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treatments.swift; sourceTree = "<group>"; };
 		DD493AE62ACF23CF009A6922 /* DeviceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
 		DD493AE82ACF2445009A6922 /* BGData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGData.swift; sourceTree = "<group>"; };
+		DD50C10A2F60B00000000001 /* NightscoutSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightscoutSocketManager.swift; sourceTree = "<group>"; };
+		DD50C10A2F60B00000000003 /* NightscoutSocketDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightscoutSocketDataHandler.swift; sourceTree = "<group>"; };
 		DD4A407D2E6AFEE6007B318B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		DD4AFB3A2DB55CB600BB593F /* TimeOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDay.swift; sourceTree = "<group>"; };
 		DD4AFB3C2DB55D2900BB593F /* AlarmConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmConfiguration.swift; sourceTree = "<group>"; };
@@ -997,6 +1014,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD50C10A2F60A00000000001 /* SocketIO in Frameworks */,
 				FCFEEC9E2486E68E00402A7F /* WebKit.framework in Frameworks */,
 				3F1335F351590E573D8E6962 /* Pods_LoopFollow.framework in Frameworks */,
 			);
@@ -1052,6 +1070,7 @@
 				6589CC5E2E9E7D1600BB18FE /* GraphSettingsView.swift */,
 				657F98172F043D8100F732BD /* HomeContentView.swift */,
 				6589CC5F2E9E7D1600BB18FE /* SettingsMenuView.swift */,
+				6589CC702E9E7D1600BB18FE /* ShareLogNoticeView.swift */,
 				65A100002F5AA00000AA1001 /* UnitsSettingsView.swift */,
 				65A100022F5AA00000AA1002 /* UnitsConfigurationView.swift */,
 				6589CC602E9E7D1600BB18FE /* TabCustomizationModal.swift */,
@@ -1151,9 +1170,29 @@
 			path = Metric;
 			sourceTree = "<group>";
 		};
+		B500000000000000000000B5 /* QuickPickMeals */ = {
+			isa = PBXGroup;
+			children = (
+				B500000000000000000000B1 /* RemoteMealHistoryEntry.swift */,
+				B500000000000000000000B3 /* QuickPickMealsManager.swift */,
+			);
+			path = QuickPickMeals;
+			sourceTree = "<group>";
+		};
+		B500000000000000000000A5 /* QuickPickBoluses */ = {
+			isa = PBXGroup;
+			children = (
+				B500000000000000000000A1 /* RemoteBolusHistoryEntry.swift */,
+				B500000000000000000000A3 /* QuickPickBolusesManager.swift */,
+			);
+			path = QuickPickBoluses;
+			sourceTree = "<group>";
+		};
 		DD0C0C6E2C4AFFB800DBADDF /* Remote */ = {
 			isa = PBXGroup;
 			children = (
+				B500000000000000000000A5 /* QuickPickBoluses */,
+				B500000000000000000000B5 /* QuickPickMeals */,
 				DDDF6F4A2D479B6A00884336 /* Nightscout */,
 				DDDF6F482D479AEF00884336 /* NoRemoteView.swift */,
 				DDEF503E2D479B8A00884336 /* LoopAPNS */,
@@ -1274,6 +1313,8 @@
 				DD0C0C5F2C415B9D00DBADDF /* ProfileManager.swift */,
 				DD0C0C612C4175FD00DBADDF /* NSProfile.swift */,
 				DD5334222C60ED3600062F9D /* IAge.swift */,
+				DD50C10A2F60B00000000001 /* NightscoutSocketManager.swift */,
+				DD50C10A2F60B00000000003 /* NightscoutSocketDataHandler.swift */,
 			);
 			path = Nightscout;
 			sourceTree = "<group>";
@@ -1509,6 +1550,7 @@
 				DDF6999D2C5AAA640058A8D9 /* ErrorMessageView.swift */,
 				DD16AF0E2C99592F00FB655A /* HKQuantityInputView.swift */,
 				DD16AF102C997B4600FB655A /* LoadingButtonView.swift */,
+				B500000000000000000000C1 /* QuickPickSectionHeader.swift */,
 				DDE75D262DE5E539007C1FC1 /* ActionRow.swift */,
 				654132E62E19EA7E00BDBE08 /* SimpleQRCodeScannerView.swift */,
 				DDE75D282DE5E56C007C1FC1 /* LinkRow.swift */,
@@ -1905,6 +1947,9 @@
 				65AC26702ED245DF00421360 /* Treatments */,
 			);
 			name = LoopFollow;
+			packageProductDependencies = (
+				DD50C10A2F60A00000000003 /* SocketIO */,
+			);
 			productName = LoopFollow;
 			productReference = FC9788142485969B00A7906C /* Loop Follow.app */;
 			productType = "com.apple.product-type.application";
@@ -1940,6 +1985,9 @@
 				Base,
 			);
 			mainGroup = FC97880B2485969B00A7906C;
+			packageReferences = (
+				DD50C10A2F60A00000000002 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+			);
 			productRefGroup = FC9788152485969B00A7906C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2278,6 +2326,7 @@
 				DDC6CA4B2DD8E4960060EE25 /* PumpVolumeAlarmEditor.swift in Sources */,
 				6589CC752E9EAFB700BB18FE /* SettingsMigrationManager.swift in Sources */,
 				DD16AF0F2C99592F00FB655A /* HKQuantityInputView.swift in Sources */,
+				B500000000000000000000C2 /* QuickPickSectionHeader.swift in Sources */,
 				DDFF3D7F2D1414A200BF9D9E /* BLEDevice.swift in Sources */,
 				DD9ACA042D32821400415D8A /* DeviceStatusTask.swift in Sources */,
 				FC16A97D24996747003D6245 /* SpeakBG.swift in Sources */,
@@ -2304,10 +2353,16 @@
 				6584B1012E4A263900135D4D /* TOTPService.swift in Sources */,
 				DD48780E2C7B74A40048F05C /* TrioRemoteControlViewModel.swift in Sources */,
 				DDEF503A2D31615000999A5D /* LogManager.swift in Sources */,
+				B500000000000000000000A2 /* RemoteBolusHistoryEntry.swift in Sources */,
+				B500000000000000000000A4 /* QuickPickBolusesManager.swift in Sources */,
+				B500000000000000000000B2 /* RemoteMealHistoryEntry.swift in Sources */,
+				B500000000000000000000B4 /* QuickPickMealsManager.swift in Sources */,
 				DD4878172C7B75350048F05C /* BolusView.swift in Sources */,
 				DD026E592EA2C8A200A39CB5 /* InsulinPrecisionManager.swift in Sources */,
 				374A77992F5BD8B200E96858 /* APNSClient.swift in Sources */,
 				DD493AE72ACF23CF009A6922 /* DeviceStatus.swift in Sources */,
+				DD50C10A2F60B00000000002 /* NightscoutSocketManager.swift in Sources */,
+				DD50C10A2F60B00000000004 /* NightscoutSocketDataHandler.swift in Sources */,
 				DDC7E5162DBCFA7F00EB1127 /* SnoozerView.swift in Sources */,
 				DD7F4C232DD7A62200D449E9 /* AlarmType+SortDirection.swift in Sources */,
 				65E8A2862E44B0300065037B /* VolumeButtonHandler.swift in Sources */,
@@ -2370,6 +2425,7 @@
 				65A100032F5AA00000AA1002 /* UnitsConfigurationView.swift in Sources */,
 				657F98182F043D8100F732BD /* HomeContentView.swift in Sources */,
 				6589CC6F2E9E7D1600BB18FE /* AdvancedSettingsViewModel.swift in Sources */,
+				6589CC712E9E7D1600BB18FE /* ShareLogNoticeView.swift in Sources */,
 				DD493ADF2ACF22BB009A6922 /* SAge.swift in Sources */,
 				DDC6CA3F2DD7C6340060EE25 /* TemporaryAlarmEditor.swift in Sources */,
 				DDF699992C5AA3060058A8D9 /* TempTargetPresetManager.swift in Sources */,
@@ -2936,6 +2992,25 @@
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD50C10A2F60A00000000002 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD50C10A2F60A00000000003 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD50C10A2F60A00000000002 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FC97880C2485969B00A7906C /* Project object */;
 }
