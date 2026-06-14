@@ -35,9 +35,6 @@ struct NightscoutSettingsView: View {
             case .token: tokenInfoSheet
             }
         }
-        .onDisappear {
-            viewModel.dismiss()
-        }
         .navigationDestination(isPresented: $showUnitsSetup) {
             UnitsOnboardingView {
                 dismiss()
