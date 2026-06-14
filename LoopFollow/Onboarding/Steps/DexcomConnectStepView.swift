@@ -14,7 +14,7 @@ struct DexcomConnectStepView: View {
                 OnboardingStepHeader(
                     systemImage: "drop.fill",
                     title: "Connect Dexcom Share",
-                    subtitle: "Sign in with the Dexcom Share account you use to follow glucose."
+                    subtitle: "Sign in with the Dexcom Share account that shares glucose data."
                 )
                 .textCase(nil)
                 .padding(.bottom, 8)
@@ -24,8 +24,8 @@ struct DexcomConnectStepView: View {
 
             Section(header: Text("Dexcom Share")) {
                 HStack {
-                    Text("User Name")
-                    TextField("Enter User Name", text: $viewModel.userName)
+                    Text("Username")
+                    TextField("Enter Username", text: $viewModel.userName)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
@@ -42,7 +42,7 @@ struct DexcomConnectStepView: View {
 
                 Picker("Server", selection: $viewModel.server) {
                     Text("US").tag("US")
-                    Text("NON-US").tag("NON-US")
+                    Text("Outside US").tag("NON-US")
                 }
                 .pickerStyle(.segmented)
             }

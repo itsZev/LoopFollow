@@ -14,7 +14,7 @@ struct AlarmsStepView: View {
                 OnboardingStepHeader(
                     systemImage: "bell.badge.fill",
                     title: "Useful alarms",
-                    subtitle: "We'll set up a few safety alarms with sensible defaults. Turn off any you don't want and adjust the rest."
+                    subtitle: "We'll set up a few commonly used alarms with sensible defaults. Turn off any you don't want and adjust the rest."
                 )
                 .textCase(nil)
                 .padding(.bottom, 8)

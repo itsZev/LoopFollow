@@ -12,7 +12,7 @@ struct DataSourceChoiceStepView: View {
                 OnboardingStepHeader(
                     systemImage: "antenna.radiowaves.left.and.right",
                     title: "Choose a data source",
-                    subtitle: "LoopFollow needs somewhere to read glucose from. Pick one now — you can add the other later in Settings."
+                    subtitle: "LoopFollow needs a glucose data source. Pick one now — you can change or add more later in Settings."
                 )
 
                 VStack(spacing: 14) {

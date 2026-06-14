@@ -23,7 +23,7 @@ struct CompletionStepView: View {
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
 
-                Text("LoopFollow is ready to go. You can adjust everything later from the Menu and Alarms tabs.")
+                Text("You're ready to go. You can adjust everything later from the Menu and Alarms tabs.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

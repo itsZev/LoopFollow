@@ -14,8 +14,8 @@ struct DexcomSettingsView: View {
         Form {
             Section(header: Text("Dexcom Settings")) {
                 HStack {
-                    Text("User Name")
-                    TextField("Enter User Name", text: $viewModel.userName)
+                    Text("Username")
+                    TextField("Enter Username", text: $viewModel.userName)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
@@ -32,7 +32,7 @@ struct DexcomSettingsView: View {
 
                 Picker("Server", selection: $viewModel.server) {
                     Text("US").tag("US")
-                    Text("NON-US").tag("NON-US")
+                    Text("Outside US").tag("NON-US")
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }

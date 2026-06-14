@@ -12,7 +12,7 @@ struct UnitsStepView: View {
                 OnboardingStepHeader(
                     systemImage: "ruler",
                     title: "Units & metrics",
-                    subtitle: "Choose how glucose and your statistics are displayed. You can change any of this later in Settings."
+                    subtitle: "Choose how glucose values and statistics are displayed. You can change any of this later in Settings."
                 )
                 .textCase(nil)
                 .padding(.bottom, 8)
