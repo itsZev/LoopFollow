@@ -23,7 +23,7 @@ struct CompletionStepView: View {
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
 
-                Text("You're ready to go. You can adjust everything later from the Menu and Alarms tabs.")
+                Text("You're ready to go. You can adjust everything later from the Menu.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -33,7 +33,7 @@ struct CompletionStepView: View {
             Spacer()
 
             Button { viewModel.finish() } label: {
-                Text("Done")
+                Text("Finish")
                     .font(.body.weight(.semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 4)
@@ -44,13 +44,6 @@ struct CompletionStepView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            // The user just set up alarms, so this is the natural moment to ask
-            // for notification permission — on context, and after onboarding
-            // rather than fronting it on first launch.
-            if viewModel.seedAlarms.contains(where: { $0.isEnabled }) {
-                NotificationAuthorization.requestIfNeeded()
-            }
-
             guard !reduceMotion else { return }
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6).delay(0.1)) {
                 animate = true

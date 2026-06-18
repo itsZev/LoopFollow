@@ -5,14 +5,27 @@ import SwiftUI
 
 struct DexcomConnectStepView: View {
     @ObservedObject var viewModel: DexcomSettingsViewModel
+    @ObservedObject var onboarding: OnboardingViewModel
 
     var body: some View {
+        VStack(spacing: 0) {
+            form
+            OnboardingNavFooter(
+                continueEnabled: viewModel.canVerifyProceed,
+                showBack: onboarding.canGoBack,
+                onBack: { onboarding.goBack() },
+                onContinue: { onboarding.advance() }
+            )
+        }
+    }
+
+    private var form: some View {
         Form {
             Section {
                 EmptyView()
             } header: {
                 OnboardingStepHeader(
-                    systemImage: "drop.fill",
+                    systemImage: "sensor.tag.radiowaves.forward.fill",
                     title: "Connect Dexcom Share",
                     subtitle: "Sign in with the Dexcom Share account that shares glucose data."
                 )
@@ -26,6 +39,7 @@ struct DexcomConnectStepView: View {
                 HStack {
                     Text("Username")
                     TextField("Enter Username", text: $viewModel.userName)
+                        .textContentType(.username)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
@@ -36,7 +50,8 @@ struct DexcomConnectStepView: View {
                     TogglableSecureInput(
                         placeholder: "Enter Password",
                         text: $viewModel.password,
-                        style: .singleLine
+                        style: .singleLine,
+                        textContentType: .password
                     )
                 }
 
@@ -48,13 +63,27 @@ struct DexcomConnectStepView: View {
             }
 
             Section {
-                HStack {
-                    Image(systemName: viewModel.hasCredentials ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(viewModel.hasCredentials ? .green : .secondary)
-                    Text(viewModel.hasCredentials ? "Credentials entered" : "Enter your username and password")
+                HStack(spacing: 10) {
+                    statusIcon
+                        .frame(width: 20)
+                    Text(viewModel.statusMessage)
                         .foregroundColor(.secondary)
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private var statusIcon: some View {
+        switch viewModel.statusKind {
+        case .idle:
+            Image(systemName: "circle").foregroundColor(.secondary)
+        case .checking:
+            ProgressView()
+        case .connected:
+            Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+        case .error:
+            Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.red)
         }
     }
 }

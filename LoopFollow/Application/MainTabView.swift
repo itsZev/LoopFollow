@@ -55,28 +55,48 @@ struct MainTabView: View {
             if !Storage.shared.hasCompletedOnboarding.value {
                 showOnboarding = true
             } else {
-                presentTelemetryConsentIfNeeded()
+                runPostOnboardingPrompts()
             }
         }
         .fullScreenCover(isPresented: $showOnboarding, onDismiss: {
-            presentTelemetryConsentIfNeeded()
+            // Covers both finishing and skipping onboarding — the telemetry and
+            // notification steps live inside the flow, so anyone who skips still
+            // needs these handled here.
+            runPostOnboardingPrompts()
         }) {
             OnboardingContainerView(onClose: { showOnboarding = false })
         }
-        .sheet(isPresented: $showTelemetryConsent) {
+        .sheet(isPresented: $showTelemetryConsent, onDismiss: {
+            // Ask for notifications only once telemetry is resolved, so the system
+            // prompt never stacks on top of the consent sheet.
+            requestNotificationsIfAlarmsEnabled()
+        }) {
             // User must explicitly choose — no swipe-to-dismiss.
             TelemetryConsentView()
                 .interactiveDismissDisabled(true)
         }
     }
 
-    // One-time telemetry consent prompt. Previously presented by SceneDelegate,
-    // which was removed in the storyboard→SwiftUI migration; without this, fresh
-    // installs stay permanently undecided and telemetry never sends. The storage
-    // flag keeps it to a single appearance.
-    private func presentTelemetryConsentIfNeeded() {
+    /// Runs after onboarding closes, whether it was completed or skipped. Telemetry
+    /// consent and notification permission both live inside the onboarding flow, so
+    /// a skip would otherwise bypass them. Telemetry consent goes first (as a
+    /// sheet); the notification request follows on its dismissal so the two never
+    /// appear at once. When the user completed the flow these are already decided,
+    /// so both calls are no-ops.
+    private func runPostOnboardingPrompts() {
         if !Storage.shared.telemetryConsentDecisionMade.value {
-            showTelemetryConsent = true
+            showTelemetryConsent = true // notifications requested on its dismiss
+        } else {
+            requestNotificationsIfAlarmsEnabled()
+        }
+    }
+
+    /// Deferred-permission policy: only ask for notifications once there's an
+    /// enabled alarm that needs them. Safe to call repeatedly — it's a no-op once
+    /// the status is determined.
+    private func requestNotificationsIfAlarmsEnabled() {
+        if Storage.shared.alarms.value.contains(where: { $0.isEnabled }) {
+            NotificationAuthorization.requestIfNeeded()
         }
     }
 

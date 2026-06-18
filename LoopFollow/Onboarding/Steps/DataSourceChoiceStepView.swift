@@ -24,9 +24,15 @@ struct DataSourceChoiceStepView: View {
                     )
                     choiceCard(
                         source: .dexcom,
-                        icon: "drop.fill",
+                        icon: "sensor.tag.radiowaves.forward.fill",
                         title: "Dexcom Share",
-                        detail: "Follow glucose directly from a Dexcom Share account. Simplest option when there's no Nightscout site."
+                        detail: "Follow glucose directly from a Dexcom Share account, without a Nightscout site."
+                    )
+                    choiceCard(
+                        source: .copyFromPhone,
+                        icon: "qrcode",
+                        title: "Copy from another phone",
+                        detail: "Already using LoopFollow on another phone? Scan its QR code to copy the connection here."
                     )
                 }
                 .padding(.horizontal)

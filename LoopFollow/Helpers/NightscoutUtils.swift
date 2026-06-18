@@ -466,9 +466,21 @@ class NightscoutUtils {
         let (data, response) = try await URLSession.shared.data(for: request)
         try validateProvisioningResponse(response)
 
-        let subject = try JSONDecoder().decode(AuthSubject.self, from: data)
+        // Nightscout returns the created subject wrapped in an array
+        // (`[{…}]`) on current versions, but a bare object on some older ones,
+        // so accept either shape.
+        let subject = try decodeCreatedSubject(from: data)
         guard let id = subject.id, !id.isEmpty else { throw NightscoutError.unknown }
         return id
+    }
+
+    private static func decodeCreatedSubject(from data: Data) throws -> AuthSubject {
+        let decoder = JSONDecoder()
+        if let array = try? decoder.decode([AuthSubject].self, from: data) {
+            guard let first = array.first else { throw NightscoutError.unknown }
+            return first
+        }
+        return try decoder.decode(AuthSubject.self, from: data)
     }
 
     /// Reproduces Nightscout's subject-token derivation (`lib/authorization`):

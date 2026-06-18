@@ -15,14 +15,14 @@ struct OnboardingContainerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if viewModel.step.showsChrome {
+            if viewModel.step.showsProgressHeader {
                 header
             }
 
             stepContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            if viewModel.step.showsChrome {
+            if viewModel.step.usesSharedFooter {
                 footer
             }
         }
@@ -33,11 +33,20 @@ struct OnboardingContainerView: View {
     // MARK: - Chrome
 
     private var header: some View {
-        HStack(spacing: 12) {
-            OnboardingProgressBar(progress: viewModel.progress)
-            Button("Skip") { viewModel.skip() }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+        VStack(spacing: 6) {
+            HStack(spacing: 12) {
+                OnboardingProgressBar(progress: viewModel.progress)
+                Button("Skip") { viewModel.skip() }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+
+            if !viewModel.progressLabel.isEmpty {
+                Text(viewModel.progressLabel)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
         .padding(.horizontal)
         .padding(.top, 12)
@@ -50,19 +59,31 @@ struct OnboardingContainerView: View {
             switch viewModel.step {
             case .welcome:
                 WelcomeStepView(viewModel: viewModel)
+            case .overview:
+                OverviewStepView()
             case .dataSource:
                 DataSourceChoiceStepView(viewModel: viewModel)
             case .connect:
                 switch viewModel.dataSource {
                 case .dexcom:
-                    DexcomConnectStepView(viewModel: viewModel.dexcomViewModel)
+                    DexcomConnectStepView(viewModel: viewModel.dexcomViewModel, onboarding: viewModel)
+                case .copyFromPhone:
+                    ConnectImportStepView(viewModel: viewModel)
                 default:
-                    NightscoutConnectStepView(viewModel: viewModel.nightscoutViewModel)
+                    NightscoutConnectStepView(viewModel: viewModel.nightscoutViewModel, onboarding: viewModel)
                 }
             case .units:
                 UnitsStepView()
+            case .generalAlarms:
+                GeneralAlarmsStepView()
             case .alarms:
                 AlarmsStepView(viewModel: viewModel)
+            case .tabOrder:
+                TabOrderStepView()
+            case .notifications:
+                NotificationsStepView(viewModel: viewModel)
+            case .telemetry:
+                TelemetryStepView(viewModel: viewModel)
             case .completion:
                 CompletionStepView(viewModel: viewModel)
             }
@@ -81,31 +102,12 @@ struct OnboardingContainerView: View {
     }
 
     private var footer: some View {
-        HStack {
-            if viewModel.step.previous != nil {
-                Button {
-                    withStepAnimation { viewModel.goBack() }
-                } label: {
-                    Label("Back", systemImage: "chevron.left")
-                        .font(.body.weight(.medium))
-                }
-                .buttonStyle(.bordered)
-            }
-
-            Spacer()
-
-            Button {
-                withStepAnimation { viewModel.advance() }
-            } label: {
-                Text("Continue")
-                    .font(.body.weight(.semibold))
-                    .frame(minWidth: 120)
-            }
-            .buttonStyle(.borderedProminent)
-            .disabled(!viewModel.canProceed)
-        }
-        .padding()
-        .background(.bar)
+        OnboardingNavFooter(
+            continueEnabled: viewModel.canProceed,
+            showBack: viewModel.canGoBack,
+            onBack: { withStepAnimation { viewModel.goBack() } },
+            onContinue: { withStepAnimation { viewModel.advance() } }
+        )
     }
 
     private func withStepAnimation(_ change: () -> Void) {

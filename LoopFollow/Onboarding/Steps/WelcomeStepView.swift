@@ -23,7 +23,7 @@ struct WelcomeStepView: View {
 
                 Text(viewModel.isAlreadyConfigured
                     ? "You're already set up. You can skip this guide, or walk through it to review your settings."
-                    : "Let's get you connected to your data and set up a few useful alarms. It only takes a minute.")
+                    : "Let's get you connected to your data and set up a few recommended alarms. It only takes a few minutes.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

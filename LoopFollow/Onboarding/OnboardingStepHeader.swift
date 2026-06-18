@@ -10,7 +10,9 @@ struct OnboardingStepHeader: View {
     let subtitle: String
 
     var body: some View {
-        VStack(spacing: 12) {
+        // Left-aligned: justified/centered body copy is harder to read, so the
+        // header reads as a natural top-down intro.
+        VStack(alignment: .leading, spacing: 12) {
             Image(systemName: systemImage)
                 .font(.system(size: 44, weight: .semibold))
                 .foregroundStyle(Color.accentColor)
@@ -18,14 +20,14 @@ struct OnboardingStepHeader: View {
 
             Text(title)
                 .font(.title2.weight(.bold))
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
 
             Text(subtitle)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 8)
     }

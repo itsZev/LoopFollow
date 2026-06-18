@@ -16,6 +16,7 @@ struct DexcomSettingsView: View {
                 HStack {
                     Text("Username")
                     TextField("Enter Username", text: $viewModel.userName)
+                        .textContentType(.username)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
@@ -26,7 +27,8 @@ struct DexcomSettingsView: View {
                     TogglableSecureInput(
                         placeholder: "Enter Password",
                         text: $viewModel.password,
-                        style: .singleLine
+                        style: .singleLine,
+                        textContentType: .password
                     )
                 }
 
