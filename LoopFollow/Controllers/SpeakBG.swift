@@ -101,6 +101,13 @@ extension MainViewController {
                     decrease: "och det har minskat med",
                     currentBGIs: "Blodsockret är"
                 )
+            case "zh":
+                return AnnouncementTexts(
+                    stable: "平稳",
+                    increase: "上升",
+                    decrease: "下降",
+                    currentBGIs: "血糖"
+                )
             case "en": fallthrough
             default:
                 return AnnouncementTexts(
@@ -120,6 +127,9 @@ extension MainViewController {
             "it": "it-IT",
             "sk": "sk-SK",
             "sv": "sv-SE",
+            "zh": "zh-CN",
+            "zh-CN": "zh-CN",
+            "zh-Hans": "zh-CN",
         ]
 
         static func voiceLanguageCode(forAppLanguage appLanguage: String) -> String {

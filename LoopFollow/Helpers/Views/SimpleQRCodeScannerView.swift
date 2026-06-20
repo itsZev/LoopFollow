@@ -50,7 +50,7 @@ class SimpleQRCodeScannerViewController: UIViewController {
             target: self,
             action: #selector(cancelTapped)
         )
-        navigationItem.title = "Scan QR Code"
+        navigationItem.title = "扫描二维码"
 
         setupCamera()
     }

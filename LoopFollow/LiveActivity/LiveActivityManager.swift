@@ -1263,8 +1263,8 @@ final class LiveActivityManager {
 
     private func scheduleRenewalFailedNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Live Activity Expiring"
-        content.body = "Live Activity will expire soon. Open LoopFollow to restart."
+        content.title = "实时活动即将过期"
+        content.body = "实时活动即将过期，请打开 LoopFollow 重新启动。"
         content.sound = .default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
@@ -1288,8 +1288,8 @@ final class LiveActivityManager {
 
     private func scheduleApnsCredentialsMissingNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Live Activity Setup Needed"
-        content.body = "APNs credentials are missing or invalid. Configure them in Settings → APN."
+        content.title = "需要设置实时活动"
+        content.body = "APNs 凭据缺失或无效，请在设置 → APN 中配置。"
         content.sound = .default
         let request = UNNotificationRequest(
             identifier: LiveActivityManager.apnsCredentialsNotificationID,
@@ -1301,8 +1301,8 @@ final class LiveActivityManager {
 
     private func schedulePushToStartTokenMissingNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Live Activity Could Not Start"
-        content.body = "Live Activity could not start — try again in a moment."
+        content.title = "实时活动无法启动"
+        content.body = "实时活动无法启动，请稍后重试。"
         content.sound = .default
         let request = UNNotificationRequest(
             identifier: LiveActivityManager.pushToStartTokenNotificationID,

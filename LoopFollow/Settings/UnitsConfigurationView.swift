@@ -13,8 +13,8 @@ struct UnitsConfigurationView: View {
 
     var body: some View {
         Group {
-            Section("Glucose") {
-                Picker("Glucose Unit", selection: $glucoseUnit) {
+            Section("血糖") {
+                Picker("血糖单位", selection: $glucoseUnit) {
                     Text("mg/dL").tag(GlucoseDisplayUnit.mgdL)
                     Text("mmol/L").tag(GlucoseDisplayUnit.mmolL)
                 }

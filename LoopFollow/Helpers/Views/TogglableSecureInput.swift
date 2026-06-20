@@ -49,7 +49,7 @@ struct TogglableSecureInput: View {
                                 ToolbarItemGroup(placement: .keyboard) {
                                     if isMultilineFocused {
                                         Spacer()
-                                        Button("Done") {
+                                        Button("完成") {
                                             isMultilineFocused = false
                                         }
                                     }

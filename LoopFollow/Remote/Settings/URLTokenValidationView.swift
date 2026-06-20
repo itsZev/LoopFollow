@@ -75,23 +75,23 @@ struct URLTokenValidationView: View {
 
             Section {
                 HStack {
-                    Button("Cancel") {
+                    Button("取消") {
                         onCancel()
                     }
                     .buttonStyle(.bordered)
 
                     Spacer()
 
-                    Button("Confirm & Import") {
+                    Button("确认并导入") {
                         onConfirm(settings)
                     }
                     .buttonStyle(.borderedProminent)
                 }
             }
         }
-        .navigationTitle("URL/Token Validation")
+        .navigationTitle("URL/Token 验证")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Button("Cancel") {
+        .navigationBarItems(trailing: Button("取消") {
             onCancel()
         })
     }

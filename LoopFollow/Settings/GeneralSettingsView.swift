@@ -86,6 +86,7 @@ struct GeneralSettingsView: View {
                             Text("Italian").tag("it")
                             Text("Slovak").tag("sk")
                             Text("Swedish").tag("sv")
+                            Text("中文").tag("zh")
                         }
 
                         Toggle("Always", isOn: $speakBGAlways.value.animation())

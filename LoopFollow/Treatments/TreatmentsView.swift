@@ -436,11 +436,11 @@ struct TreatmentDetailView: View {
 
             if !viewModel.isLoading, let detail = viewModel.detail {
                 if detail.iob != nil || detail.cob != nil || detail.eventualBG != nil {
-                    Section(header: Text("Device Data")) {
+                    Section(header: Text("设备数据")) {
                         HStack(spacing: 20) {
                             if let iob = detail.iob {
                                 VStack(alignment: .leading) {
-                                    Text("IOB")
+                                    Text("活性胰岛素")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                     Text(String(format: "%.2f U", iob))
@@ -451,7 +451,7 @@ struct TreatmentDetailView: View {
 
                             if let cob = detail.cob {
                                 VStack(alignment: .leading) {
-                                    Text("COB")
+                                    Text("活性碳水")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                     Text(String(format: "%.0f g", cob))

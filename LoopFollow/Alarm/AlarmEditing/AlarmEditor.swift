@@ -25,14 +25,14 @@ struct AlarmEditor: View {
             }.navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
+                        Button("完成") {
                             onDone()
                             dismiss()
                         }
                     }
                     if isNew {
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
+                            Button("取消") {
                                 onCancel()
                                 dismiss()
                             }

@@ -318,11 +318,11 @@ struct LoopAPNSCarbsView: View {
 
                         Spacer()
                     }
-                    .navigationTitle("Consumption Time")
+                    .navigationTitle("食用时间")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
+                            Button("完成") {
                                 consumedDate = clampedConsumedDate(consumedDate)
                                 showDatePickerSheet = false
                             }
@@ -356,11 +356,11 @@ struct LoopAPNSCarbsView: View {
 
                         Spacer()
                     }
-                    .navigationTitle("Absorption Time")
+                    .navigationTitle("吸收时间")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
+                            Button("完成") {
                                 normalizeAbsorptionTime()
                                 showAbsorptionPickerSheet = false
                             }
@@ -432,16 +432,16 @@ struct LoopAPNSCarbsView: View {
                     )
                 case .error:
                     return Alert(
-                        title: Text("Error"),
+                        title: Text("错误"),
                         message: Text(alertMessage),
-                        dismissButton: .default(Text("OK"))
+                        dismissButton: .default(Text("确定"))
                     )
                 case .confirmation:
                     let timeFormatter = DateFormatter()
                     timeFormatter.timeStyle = .short
                     timeFormatter.dateStyle = .short
                     return Alert(
-                        title: Text("Confirm Carbs"),
+                        title: Text("确认碳水"),
                         message: Text("Send \(Int(carbsAmount.doubleValue(for: .gram())))g of carbs with \(absorptionConfirmationText)h absorption time at \(timeFormatter.string(from: consumedDate))?"),
                         primaryButton: .default(Text("Send")) {
                             sendCarbsConfirmed()

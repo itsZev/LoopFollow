@@ -481,6 +481,7 @@ class Storage {
 
     /// Get items ordered by their position in the tab bar (positions 1-4)
     func orderedTabBarItems() -> [TabItem] {
-        TabPosition.customizablePositions.compactMap { tabItem(at: $0) }
+        let items = TabPosition.customizablePositions.compactMap { tabItem(at: $0) }
+        return MVPFeatureFlags.remoteControlEnabled ? items : items.filter { $0 != .remote }
     }
 }

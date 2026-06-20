@@ -51,7 +51,7 @@ class MoreMenuViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        navigationItem.title = "Menu"
+        navigationItem.title = "更多"
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonDisplayMode = .minimal
 
@@ -134,14 +134,14 @@ class MoreMenuViewController: UIViewController {
 
         var sections: [MenuSection] = [
             MenuSection(title: nil, items: [
-                MenuItem(title: "Settings", icon: "gearshape") { [weak self] in
+                MenuItem(title: "设置", icon: "gearshape") { [weak self] in
                     self?.openSettings()
                 },
             ]),
         ]
 
         sections.append(
-            MenuSection(title: "Features", items: TabItem.featureOrder.map { item in
+            MenuSection(title: "功能", items: TabItem.featureOrder.map { item in
                 MenuItem(title: item.displayName, icon: item.icon) { [weak self] in
                     self?.openItem(item)
                 }
@@ -149,17 +149,17 @@ class MoreMenuViewController: UIViewController {
         )
 
         sections.append(contentsOf: [
-            MenuSection(title: "Logging", items: [
-                MenuItem(title: "View Log", icon: "doc.text.magnifyingglass") { [weak self] in
+            MenuSection(title: "日志", items: [
+                MenuItem(title: "查看日志", icon: "doc.text.magnifyingglass") { [weak self] in
                     self?.openViewLog()
                 },
-                MenuItem(title: "Share Logs", icon: "square.and.arrow.up", style: .action) { [weak self] in
+                MenuItem(title: "分享日志", icon: "square.and.arrow.up", style: .action) { [weak self] in
                     self?.shareLogs()
                 },
             ]),
 
             // Section 3: Support & Community
-            MenuSection(title: "Support & Community", items: [
+            MenuSection(title: "支持与社区", items: [
                 MenuItem(title: "LoopFollow Docs", icon: "book", style: .externalLink) { [weak self] in
                     self?.openURL("https://loopfollowdocs.org/")
                 },
@@ -172,10 +172,10 @@ class MoreMenuViewController: UIViewController {
             ]),
 
             // Section 4: Build Information
-            MenuSection(title: "Build Information", items: {
+            MenuSection(title: "构建信息", items: {
                 var items: [MenuItem] = [
-                    MenuItem(title: "Version", icon: "", style: .detail(ver, versionTint)),
-                    MenuItem(title: "Latest version", icon: "", style: .detail(latestVersion ?? "Fetching…", .secondaryLabel)),
+                    MenuItem(title: "版本", icon: "", style: .detail(ver, versionTint)),
+                    MenuItem(title: "最新版本", icon: "", style: .detail(latestVersion ?? "获取中…", .secondaryLabel)),
                 ]
 
                 if !(build.isMacApp() || build.isSimulatorBuild()) {
@@ -187,12 +187,12 @@ class MoreMenuViewController: UIViewController {
                 }
 
                 items.append(MenuItem(
-                    title: "Built",
+                    title: "构建日期",
                     icon: "",
                     style: .detail(dateTimeUtils.formattedDate(from: build.buildDate()), .secondaryLabel)
                 ))
                 items.append(MenuItem(
-                    title: "Branch",
+                    title: "分支",
                     icon: "",
                     style: .detail(build.branchAndSha, .secondaryLabel)
                 ))
@@ -276,6 +276,7 @@ class MoreMenuViewController: UIViewController {
     }
 
     private func openRemote() {
+        guard MVPFeatureFlags.remoteControlEnabled else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let remoteVC = storyboard.instantiateViewController(withIdentifier: "RemoteViewController")
         remoteVC.overrideUserInterfaceStyle = Storage.shared.appearanceMode.value.userInterfaceStyle
@@ -310,7 +311,7 @@ class MoreMenuViewController: UIViewController {
 
     private func openAggregatedStats() {
         guard let mainVC = getMainViewController() else {
-            presentSimpleAlert(title: "Error", message: "Unable to access data")
+            presentSimpleAlert(title: "错误", message: "无法访问数据")
             return
         }
 
@@ -340,7 +341,7 @@ class MoreMenuViewController: UIViewController {
     private func shareLogs() {
         let files = LogManager.shared.logFilesForTodayAndYesterday()
         guard !files.isEmpty else {
-            presentSimpleAlert(title: "No Logs Available", message: "There are no logs to share.")
+            presentSimpleAlert(title: "无可用日志", message: "没有可分享的日志。")
             return
         }
         let avc = UIActivityViewController(activityItems: files, applicationActivities: nil)

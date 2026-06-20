@@ -115,7 +115,7 @@ struct SnoozerView: View {
                         if alarm.type.snoozeTimeUnit != .none {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text("Snooze for")
+                                    Text("贪睡时长")
                                         .font(.headline)
                                     Text("\(vm.snoozeUnits) \(vm.timeUnitLabel)")
                                         .font(.title3).bold()
@@ -131,7 +131,7 @@ struct SnoozerView: View {
 
                         // Snooze button anchored to tab bar edge (bottom of VStack)
                         Button(action: vm.snoozeTapped) {
-                            Text(vm.snoozeUnits == 0 ? "Acknowledge" : "Snooze")
+                            Text(vm.snoozeUnits == 0 ? "确认" : "贪睡")
                                 .font(.system(size: 30, weight: .bold))
                                 .frame(maxWidth: .infinity, minHeight: 60)
                                 .background(Color.orange)
@@ -301,7 +301,7 @@ struct SnoozerView: View {
                             .font(.system(size: 22, weight: .bold))
                             .foregroundColor(.red)
 
-                        Text("All alerts snoozed")
+                        Text("所有报警已贪睡")
                             .font(.headline)
                             .foregroundColor(.white)
                             .lineLimit(1)
@@ -335,7 +335,7 @@ struct SnoozerView: View {
                         }.buttonStyle(.plain)
 
                         Button(action: { adjustSnooze(byMinutes: -30) }) {
-                            Text("− 30m").bold()
+                            Text("− 30分钟").bold()
                                 .frame(minWidth: 76, minHeight: controlH)
                                 .background(Color.white.opacity(0.12))
                                 .foregroundColor(.white)
@@ -343,7 +343,7 @@ struct SnoozerView: View {
                         }.buttonStyle(.plain)
 
                         Button(action: { adjustSnooze(byMinutes: +30) }) {
-                            Text("+ 30m").bold()
+                            Text("+ 30分钟").bold()
                                 .frame(minWidth: 76, minHeight: controlH)
                                 .background(Color.white.opacity(0.12))
                                 .foregroundColor(.white)
@@ -351,7 +351,7 @@ struct SnoozerView: View {
                         }.buttonStyle(.plain)
 
                         Button(role: .destructive, action: { endSnooze() }) {
-                            Text("End now").bold()
+                            Text("立即结束").bold()
                                 .frame(minWidth: 96, minHeight: controlH)
                                 .background(Color.red.opacity(0.6))
                                 .foregroundColor(.white)
@@ -370,7 +370,7 @@ struct SnoozerView: View {
                             .foregroundColor(.red)
 
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("All alerts snoozed")
+                            Text("所有报警已贪睡")
                                 .font(.headline)
                                 .foregroundColor(.white)
 
@@ -410,7 +410,7 @@ struct SnoozerView: View {
 
                     HStack(spacing: 12) {
                         Button(action: { adjustSnooze(byMinutes: -30) }) {
-                            Text("− 30m").font(.title3).bold()
+                            Text("− 30分钟").font(.title3).bold()
                                 .frame(minWidth: 90, minHeight: 44)
                                 .background(Color.white.opacity(0.12))
                                 .foregroundColor(.white)
@@ -418,7 +418,7 @@ struct SnoozerView: View {
                         }.buttonStyle(.plain)
 
                         Button(action: { adjustSnooze(byMinutes: +30) }) {
-                            Text("+ 30m").font(.title3).bold()
+                            Text("+ 30分钟").font(.title3).bold()
                                 .frame(minWidth: 90, minHeight: 44)
                                 .background(Color.white.opacity(0.12))
                                 .foregroundColor(.white)
@@ -426,7 +426,7 @@ struct SnoozerView: View {
                         }.buttonStyle(.plain)
 
                         Button(role: .destructive, action: { endSnooze() }) {
-                            Text("End now").font(.title3).bold()
+                            Text("立即结束").font(.title3).bold()
                                 .frame(minWidth: 110, minHeight: 44)
                                 .background(Color.red.opacity(0.6))
                                 .foregroundColor(.white)
@@ -440,7 +440,7 @@ struct SnoozerView: View {
                     Button(action: { activateSnooze1h() }) {
                         HStack(spacing: 10) {
                             Image(systemName: "bell.slash")
-                            Text("Snooze all · 1h").bold()
+                            Text("全部贪睡 · 1小时").bold()
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.9)
                         }
@@ -602,10 +602,10 @@ struct SnoozerView: View {
                 .padding()
                 Spacer()
             }
-            .navigationTitle("Snooze Date")
+            .navigationTitle("贪睡日期")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { showDatePickerDate = false }
+                    Button("完成") { showDatePickerDate = false }
                 }
             }
         }
@@ -626,10 +626,10 @@ struct SnoozerView: View {
                 .padding()
                 Spacer()
             }
-            .navigationTitle("Snooze Time")
+            .navigationTitle("贪睡时间")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { showDatePickerTime = false }
+                    Button("完成") { showDatePickerTime = false }
                 }
             }
         }

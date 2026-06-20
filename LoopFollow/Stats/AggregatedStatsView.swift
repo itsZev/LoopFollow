@@ -104,11 +104,11 @@ struct AggregatedStatsView: View {
         .toolbar {
             if let onDismiss {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Done", action: onDismiss)
+                    Button("完成", action: onDismiss)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Refresh") {
+                Button("刷新") {
                     loadingError = false
                     isLoadingData = true
                     viewModel.updateDateRange(start: startDate, end: endDate) {

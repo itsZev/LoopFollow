@@ -25,47 +25,47 @@ struct SettingsMenuView: View {
             List {
                 dataSection
 
-                Section("Display Settings") {
-                    NavigationRow(title: "General",
+                Section("显示设置") {
+                    NavigationRow(title: "通用",
                                   icon: "gearshape")
                     {
                         settingsPath.value.append(Sheet.general)
                     }
 
-                    NavigationRow(title: "Graph",
+                    NavigationRow(title: "图表",
                                   icon: "chart.xyaxis.line")
                     {
                         settingsPath.value.append(Sheet.graph)
                     }
 
                     if !nightscoutURL.value.isEmpty {
-                        NavigationRow(title: "Information Display",
+                        NavigationRow(title: "信息显示",
                                       icon: "info.circle")
                         {
                             settingsPath.value.append(Sheet.infoDisplay)
                         }
                     }
-                    NavigationRow(title: "Units and Metrics",
+                    NavigationRow(title: "单位与指标",
                                   icon: "scalemass")
                     {
                         settingsPath.value.append(Sheet.units)
                     }
 
-                    NavigationRow(title: "Tabs",
+                    NavigationRow(title: "标签页",
                                   icon: "rectangle.3.group")
                     {
                         settingsPath.value.append(Sheet.tabSettings)
                     }
                 }
 
-                Section("App Settings") {
-                    NavigationRow(title: "Background Refresh",
+                Section("应用设置") {
+                    NavigationRow(title: "后台刷新",
                                   icon: "arrow.clockwise")
                     {
                         settingsPath.value.append(Sheet.backgroundRefresh)
                     }
 
-                    NavigationRow(title: "Import/Export",
+                    NavigationRow(title: "导入/导出",
                                   icon: "square.and.arrow.down")
                     {
                         settingsPath.value.append(Sheet.importExport)
@@ -78,15 +78,15 @@ struct SettingsMenuView: View {
                     }
 
                     #if !targetEnvironment(macCatalyst)
-                        NavigationRow(title: "Live Activity",
+                        NavigationRow(title: "实时活动",
                                       icon: "dot.radiowaves.left.and.right")
                         {
                             settingsPath.value.append(Sheet.liveActivity)
                         }
                     #endif
 
-                    if !nightscoutURL.value.isEmpty {
-                        NavigationRow(title: "Remote",
+                    if !nightscoutURL.value.isEmpty && MVPFeatureFlags.remoteControlEnabled {
+                        NavigationRow(title: "远程",
                                       icon: "antenna.radiowaves.left.and.right")
                         {
                             settingsPath.value.append(Sheet.remote)
@@ -94,37 +94,37 @@ struct SettingsMenuView: View {
                     }
                 }
 
-                Section("Alarms") {
-                    NavigationRow(title: "Alarms",
+                Section("报警") {
+                    NavigationRow(title: "报警",
                                   icon: "bell.badge")
                     {
                         settingsPath.value.append(Sheet.alarmSettings)
                     }
                 }
 
-                Section("Integrations") {
-                    NavigationRow(title: "Calendar",
+                Section("集成") {
+                    NavigationRow(title: "日历",
                                   icon: "calendar")
                     {
                         settingsPath.value.append(Sheet.calendar)
                     }
 
-                    NavigationRow(title: "Contact",
+                    NavigationRow(title: "联系人",
                                   icon: "person.circle")
                     {
                         settingsPath.value.append(Sheet.contact)
                     }
                 }
 
-                Section("Advanced Settings") {
-                    NavigationRow(title: "Advanced",
+                Section("高级设置") {
+                    NavigationRow(title: "高级",
                                   icon: "exclamationmark.shield")
                     {
                         settingsPath.value.append(Sheet.advanced)
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("设置")
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(for: Sheet.self) { $0.destination }
             .toolbar {
@@ -143,7 +143,7 @@ struct SettingsMenuView: View {
 
     @ViewBuilder
     private var dataSection: some View {
-        Section("Data Settings") {
+        Section("数据设置") {
             NavigationRow(title: "Nightscout",
                           icon: "network")
             {
@@ -217,7 +217,7 @@ struct AggregatedStatsViewWrapper: View {
             if let mainVC = mainViewController {
                 AggregatedStatsContentView(mainViewController: mainVC)
             } else {
-                Text("Loading stats...")
+                Text("加载统计中...")
                     .onAppear {
                         mainViewController = getMainViewController()
                     }
@@ -279,7 +279,7 @@ extension UIViewController {
         let a = UIAlertController(title: title,
                                   message: message,
                                   preferredStyle: .alert)
-        a.addAction(UIAlertAction(title: "OK", style: .default))
+        a.addAction(UIAlertAction(title: "确定", style: .default))
         present(a, animated: true)
     }
 }

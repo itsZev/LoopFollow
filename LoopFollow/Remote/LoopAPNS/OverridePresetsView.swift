@@ -125,12 +125,12 @@ struct OverridePresetsView: View {
                     )
                 case .statusFailure:
                     return Alert(
-                        title: Text("Error"),
-                        message: Text(viewModel.statusMessage ?? "An error occurred."),
-                        dismissButton: .default(Text("OK"))
+                        title: Text("错误"),
+                        message: Text(viewModel.statusMessage ?? "发生错误。"),
+                        dismissButton: .default(Text("确定"))
                     )
                 case .none:
-                    return Alert(title: Text("Unknown Alert"))
+                    return Alert(title: Text("未知警告"))
                 }
             }
         }
@@ -319,7 +319,7 @@ struct OverrideActivationModal: View {
                     }
 
                     Button(action: onCancel) {
-                        Text("Cancel")
+                        Text("取消")
                             .font(.headline)
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity)
@@ -331,11 +331,11 @@ struct OverrideActivationModal: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
-            .navigationBarTitle("Activate Override", displayMode: .inline)
+            .navigationBarTitle("激活覆盖", displayMode: .inline)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cancel") {
+                    Button("取消") {
                         onCancel()
                     }
                 }

@@ -53,13 +53,13 @@ struct AlarmSelectionView: View {
                     }
                 }
             }
-            .navigationTitle("Select Alarms to Export")
+            .navigationTitle("选择要导出的报警")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
-                leading: Button("Cancel") {
+                leading: Button("取消") {
                     onCancel()
                 },
-                trailing: Button("Export") {
+                trailing: Button("导出") {
                     let selectedAlarms = allAlarms.value.filter { selectedAlarmIds.contains($0.id) }
                     onConfirm(selectedAlarms)
                 }

@@ -184,7 +184,7 @@ struct ImportConfirmationView: View {
                             if preview.alarmCount > 0 {
                                 SettingRowView(
                                     icon: "bell",
-                                    title: "Alarms",
+                                    title: "报警",
                                     value: "\(preview.alarmCount) alarm(s): \(preview.alarmNames.joined(separator: ", "))",
                                     color: .red
                                 )
@@ -235,7 +235,7 @@ struct ImportConfirmationView: View {
                     }) {
                         HStack {
                             Image(systemName: "xmark")
-                            Text("Cancel")
+                            Text("取消")
                         }
                         .font(.headline)
                         .foregroundColor(.primary)

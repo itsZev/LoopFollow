@@ -101,9 +101,9 @@ struct ContactSettingsView: View {
                             }
                         }
 
-                        Text("IOB")
+                        Text("活性胰岛素")
                             .font(.subheadline)
-                        Picker("Show IOB", selection: $viewModel.contactIOB) {
+                        Picker("显示活性胰岛素", selection: $viewModel.contactIOB) {
                             ForEach(ContactIncludeOption.allCases, id: \.self) { option in
                                 Text(option.rawValue).tag(option)
                             }
@@ -139,19 +139,19 @@ struct ContactSettingsView: View {
                 DispatchQueue.main.async {
                     if !granted {
                         viewModel.contactEnabled = false
-                        showAlert(title: "Access Denied", message: "Please allow access to Contacts in Settings to enable this feature.")
+                        showAlert(title: "访问被拒绝", message: "请在设置中允许访问通讯录以启用此功能。")
                     }
                 }
             }
         } else if status == .denied {
             viewModel.contactEnabled = false
-            showAlert(title: "Access Denied", message: "Access to Contacts is denied. Please go to Settings and enable Contacts access.")
+            showAlert(title: "访问被拒绝", message: "通讯录访问被拒绝，请前往设置启用通讯录访问。")
         } else if status == .restricted {
             viewModel.contactEnabled = false
-            showAlert(title: "Access Restricted", message: "Access to Contacts is restricted.")
+            showAlert(title: "访问受限", message: "通讯录访问受限。")
         } else {
             viewModel.contactEnabled = false
-            showAlert(title: "Error", message: "An unknown error occurred while checking Contacts access.")
+            showAlert(title: "错误", message: "检查通讯录访问时发生未知错误。")
         }
     }
 

@@ -33,10 +33,10 @@ struct AddAlarmSheet: View {
                 }
                 .padding()
             }
-            .navigationTitle("Add Alarm")
+            .navigationTitle("添加报警")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("取消") { dismiss() }
                 }
             }
         }

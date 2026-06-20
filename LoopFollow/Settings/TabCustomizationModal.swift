@@ -18,7 +18,7 @@ enum TabCustomizationItem: Identifiable, Equatable, Hashable {
     var displayName: String {
         switch self {
         case let .tabItem(item): return item.displayName
-        case .settings: return "Menu"
+        case .settings: return "更多"
         }
     }
 
@@ -82,10 +82,10 @@ struct TabCustomizationModal: View {
             // Instructions
             Section {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Drag to reorder")
+                    Text("拖拽以重新排序")
                         .font(.subheadline)
                         .fontWeight(.medium)
-                    Text("The top 4 items appear in the tab bar. The Menu can always open every feature.")
+                    Text("前 4 项显示在标签栏中。更多菜单可随时打开所有功能。")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

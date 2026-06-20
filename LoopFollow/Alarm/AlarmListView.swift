@@ -84,7 +84,7 @@ struct AlarmListView: View {
         .sheet(item: $sheetInfo, onDismiss: handleSheetDismiss) { info in
             sheetContent(for: info)
         }
-        .navigationBarTitle("Alarms", displayMode: .inline)
+        .navigationBarTitle("报警", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button { sheetInfo = .picker } label: { Image(systemName: "plus") }
@@ -131,7 +131,7 @@ struct AlarmListView: View {
             Button(role: .destructive) {
                 store.value.removeAll { $0.id == alarm.id }
             } label: {
-                Label("Delete", systemImage: "trash.fill")
+                Label("删除", systemImage: "trash.fill")
             }
         }
     }

@@ -47,13 +47,13 @@ struct AlarmAudioSection: View {
                 step: 5
             ) {
                 HStack {
-                    Text("Delay Between Sounds")
+                    Text("声音间隔")
                     Spacer()
                     if alarm.soundDelay == 0 {
-                        Text("Off")
+                        Text("关闭")
                             .foregroundColor(.secondary)
                     } else {
-                        Text("\(alarm.soundDelay) sec")
+                        Text("\(alarm.soundDelay) 秒")
                             .foregroundColor(.secondary)
                     }
                 }
@@ -134,10 +134,10 @@ private struct TonePickerSheet: View {
                         .id(tone)
                     }
                 }
-                .navigationTitle("Choose Tone")
+                .navigationTitle("选择铃声")
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
+                        Button("完成") {
                             AlarmSound.stop()
                             dismiss()
                         }

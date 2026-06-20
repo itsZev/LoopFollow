@@ -514,7 +514,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
 
         let loadingLabel = UILabel()
         loadingLabel.translatesAutoresizingMaskIntoConstraints = false
-        loadingLabel.text = "Loading..."
+        loadingLabel.text = "加载中..."
         loadingLabel.textAlignment = .center
         loadingLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         loadingLabel.textColor = UIColor.secondaryLabel
@@ -626,10 +626,10 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
 
         // Preserve existing Menu nav controller to keep its push stack intact
         let existingMenuNav = (tabBarController.viewControllers ?? []).first(where: {
-            $0.tabBarItem.title == "Menu"
+            $0.tabBarItem.title == "更多"
         })
         if let menuNav = existingMenuNav {
-            menuNav.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.3.horizontal"), tag: 4)
+            menuNav.tabBarItem = UITabBarItem(title: "更多", image: UIImage(systemName: "line.3.horizontal"), tag: 4)
             viewControllers.append(menuNav)
         } else {
             viewControllers.append(Self.makeMenuViewController(tag: 4))
@@ -659,7 +659,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
             guard let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
                 return nil
             }
-            mainVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: item.icon), tag: tag)
+            mainVC.tabBarItem = UITabBarItem(title: "主页", image: UIImage(systemName: item.icon), tag: tag)
             return mainVC
 
         case .alarms:
@@ -668,6 +668,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
             return vc
 
         case .remote:
+            guard MVPFeatureFlags.remoteControlEnabled else { return nil }
             let vc = storyboard.instantiateViewController(withIdentifier: "RemoteViewController")
             vc.tabBarItem = UITabBarItem(title: item.displayName, image: UIImage(systemName: item.icon), tag: tag)
             return vc
@@ -712,10 +713,10 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
 
         // Preserve existing Menu nav controller to keep its push stack intact
         let existingMenuNav = (tabBarController.viewControllers ?? []).first(where: {
-            $0.tabBarItem.title == "Menu"
+            $0.tabBarItem.title == "更多"
         })
         if let menuNav = existingMenuNav {
-            menuNav.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.3.horizontal"), tag: 4)
+            menuNav.tabBarItem = UITabBarItem(title: "更多", image: UIImage(systemName: "line.3.horizontal"), tag: 4)
             viewControllers.append(menuNav)
         } else {
             viewControllers.append(Self.makeMenuViewController(tag: 4))
@@ -786,7 +787,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
 
         switch item {
         case .home:
-            tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: item.icon), tag: tag)
+            tabBarItem = UITabBarItem(title: "主页", image: UIImage(systemName: item.icon), tag: tag)
             return self
 
         case .alarms:
@@ -795,6 +796,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
             return vc
 
         case .remote:
+            guard MVPFeatureFlags.remoteControlEnabled else { return nil }
             let vc = storyboard.instantiateViewController(withIdentifier: "RemoteViewController")
             vc.tabBarItem = UITabBarItem(title: item.displayName, image: UIImage(systemName: item.icon), tag: tag)
             return vc
@@ -826,7 +828,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
         let menuVC = MoreMenuViewController()
         let navController = UINavigationController(rootViewController: menuVC)
         navController.navigationBar.prefersLargeTitles = true
-        navController.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(systemName: "line.3.horizontal"), tag: tag)
+        navController.tabBarItem = UITabBarItem(title: "更多", image: UIImage(systemName: "line.3.horizontal"), tag: tag)
         navController.overrideUserInterfaceStyle = Storage.shared.appearanceMode.value.userInterfaceStyle
         return navController
     }
@@ -913,8 +915,8 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
             }
         }
 
-        MinAgoText.text = "Refreshing"
-        Observable.shared.minAgoText.value = "Refreshing"
+        MinAgoText.text = "刷新中"
+        Observable.shared.minAgoText.value = "刷新中"
         scheduleAllTasks()
 
         currentCage = nil
@@ -1154,10 +1156,10 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
         }
     }
 
-    func versionAlert(title: String = "Update Available", message: String) {
+    func versionAlert(title: String = "发现新版本", message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
     }
@@ -1179,7 +1181,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
     func expirationAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "App Expiration Warning", message: "This app will expire in less than a week. Please rebuild to continue using it.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
     }
@@ -1378,7 +1380,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
         var minAgo = ""
         if deltaTime > 9 {
             // write old BG reading and continue pushing out end date to show last entry
-            minAgo = String(Int(deltaTime)) + " min"
+            minAgo = String(Int(deltaTime)) + "分钟"
             eventEndDate = eventStartDate.addingTimeInterval((60 * 10) + (deltaTime * 60))
         }
         var basal = "~"
@@ -1536,7 +1538,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
         // Create Setup Nightscout button
         if setupNightscoutButton == nil {
             setupNightscoutButton = UIButton(type: .system)
-            setupNightscoutButton.setTitle("Setup Nightscout", for: .normal)
+            setupNightscoutButton.setTitle("设置 Nightscout", for: .normal)
             setupNightscoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             setupNightscoutButton.backgroundColor = UIColor.systemBlue
             setupNightscoutButton.setTitleColor(.white, for: .normal)
@@ -1561,7 +1563,7 @@ class MainViewController: UIViewController, UITableViewDataSource, ChartViewDele
         // Create Setup Dexcom Share button
         if setupDexcomButton == nil {
             setupDexcomButton = UIButton(type: .system)
-            setupDexcomButton.setTitle("Setup Dexcom Share", for: .normal)
+            setupDexcomButton.setTitle("设置 Dexcom Share", for: .normal)
             setupDexcomButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             setupDexcomButton.backgroundColor = UIColor.systemGreen
             setupDexcomButton.setTitleColor(.white, for: .normal)

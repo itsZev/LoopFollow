@@ -53,6 +53,13 @@ enum TabPosition: String, CaseIterable, Codable, Comparable {
     }
 }
 
+// MARK: - MVP feature flags
+
+// Phase 4: set remoteControlEnabled to true to re-enable remote-control entry points
+enum MVPFeatureFlags {
+    static let remoteControlEnabled = false
+}
+
 /// Represents a tab item that can be placed in any position
 enum TabItem: String, CaseIterable, Codable, Identifiable {
     case home
@@ -67,13 +74,13 @@ enum TabItem: String, CaseIterable, Codable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .home: return "Home"
-        case .alarms: return "Alarms"
-        case .remote: return "Remote"
+        case .home: return "主页"
+        case .alarms: return "报警"
+        case .remote: return "远程"
         case .nightscout: return "Nightscout"
-        case .snoozer: return "Snoozer"
-        case .treatments: return "Treatments"
-        case .stats: return "Statistics"
+        case .snoozer: return "报警贪睡"
+        case .treatments: return "治疗"
+        case .stats: return "统计"
         }
     }
 
@@ -91,7 +98,8 @@ enum TabItem: String, CaseIterable, Codable, Identifiable {
 
     /// Canonical feature order used by menus and customization screens.
     static var featureOrder: [TabItem] {
-        [.home, .alarms, .nightscout, .remote, .snoozer, .stats, .treatments]
+        let all: [TabItem] = [.home, .alarms, .nightscout, .remote, .snoozer, .stats, .treatments]
+        return MVPFeatureFlags.remoteControlEnabled ? all : all.filter { $0 != .remote }
     }
 
     /// Items that can be moved between tab bar and menu (all except settings which doesn't exist as a tab)

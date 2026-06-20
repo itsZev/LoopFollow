@@ -21,7 +21,7 @@ struct HomeContentView: UIViewControllerRepresentable {
             let fallbackVC = UIViewController()
             fallbackVC.view.backgroundColor = .systemBackground
             let label = UILabel()
-            label.text = "Unable to load Home screen"
+            label.text = "无法加载主页"
             label.textAlignment = .center
             label.translatesAutoresizingMaskIntoConstraints = false
             fallbackVC.view.addSubview(label)
@@ -52,7 +52,7 @@ struct HomeModalView: View {
     var body: some View {
         NavigationView {
             HomeContentView(isModal: true)
-                .navigationTitle("Home")
+                .navigationTitle("主页")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

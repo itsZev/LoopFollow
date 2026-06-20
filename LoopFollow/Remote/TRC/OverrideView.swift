@@ -146,15 +146,15 @@ struct OverrideView: View {
                     )
                 case .statusFailure:
                     return Alert(
-                        title: Text("Error"),
-                        message: Text(statusMessage ?? "An error occurred."),
-                        dismissButton: .default(Text("OK"))
+                        title: Text("错误"),
+                        message: Text(statusMessage ?? "发生错误。"),
+                        dismissButton: .default(Text("确定"))
                     )
                 case .validation:
                     return Alert(
-                        title: Text("Validation Error"),
-                        message: Text(alertMessage ?? "Invalid input."),
-                        dismissButton: .default(Text("OK"))
+                        title: Text("验证错误"),
+                        message: Text(alertMessage ?? "输入无效。"),
+                        dismissButton: .default(Text("确定"))
                     )
                 case .none:
                     return Alert(title: Text("Unknown Alert"))

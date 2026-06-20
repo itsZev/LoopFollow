@@ -56,7 +56,7 @@ struct LoopAPNSBolusView: View {
                                             Text("\(String(format: "%.2f", recommendedBolus))U")
                                                 .font(.headline)
                                                 .foregroundColor(.primary)
-                                            Text("Calculated \(minutesSinceCalculation) minute\(minutesSinceCalculation == 1 ? "" : "s") ago")
+                                            Text("\(minutesSinceCalculation)分钟前计算")
                                                 .font(.caption)
                                                 .foregroundColor(.secondary)
                                         }
@@ -249,24 +249,24 @@ struct LoopAPNSBolusView: View {
                     )
                 case .error:
                     return Alert(
-                        title: Text("Error"),
+                        title: Text("错误"),
                         message: Text(alertMessage),
-                        dismissButton: .default(Text("OK"))
+                        dismissButton: .default(Text("确定"))
                     )
                 case .confirmation:
                     return Alert(
-                        title: Text("Confirm Insulin"),
-                        message: Text("Send \(String(format: "%.2f", insulinAmount.doubleValue(for: .internationalUnit()))) units of insulin?"),
-                        primaryButton: .default(Text("Send")) {
+                        title: Text("确认胰岛素"),
+                        message: Text("发送 \(String(format: "%.2f", insulinAmount.doubleValue(for: .internationalUnit()))) 单位胰岛素？"),
+                        primaryButton: .default(Text("发送")) {
                             authenticateAndSendInsulin()
                         },
                         secondaryButton: .cancel()
                     )
                 case .oldCalculationWarning:
                     return Alert(
-                        title: Text("Old Calculation Warning"),
+                        title: Text("旧计算警告"),
                         message: Text(alertMessage),
-                        primaryButton: .default(Text("Use Anyway")) {
+                        primaryButton: .default(Text("仍然使用")) {
                             applyRecommendedBolus()
                         },
                         secondaryButton: .cancel()

@@ -151,7 +151,7 @@ struct TempTargetView: View {
                                             targetFieldIsFocused = false
                                             durationFieldIsFocused = false
                                         } label: {
-                                            Label("Delete", systemImage: "trash")
+                                            Label("删除", systemImage: "trash")
                                         }
                                     }
                                 }
@@ -160,18 +160,18 @@ struct TempTargetView: View {
                     }
 
                     if isLoading {
-                        ProgressView("Please wait...")
+                        ProgressView("请稍候...")
                             .padding()
                     }
                 }
             }
-            .navigationTitle("Remote")
+            .navigationTitle("远程")
             .navigationBarTitleDisplayMode(.inline)
             .alert(isPresented: $showAlert) {
                 switch alertType {
                 case .confirmCommand:
                     return Alert(
-                        title: Text("Confirm Command"),
+                        title: Text("确认命令"),
                         message: Text("New Target: \(Localizer.formatQuantity(newHKTarget)) \(Localizer.getPreferredUnit().localizedShortUnitString)\nDuration: \(Int(duration.doubleValue(for: HKUnit.minute()))) minutes"),
                         primaryButton: .default(Text("Confirm"), action: {
                             enactTempTarget()
@@ -220,12 +220,12 @@ struct TempTargetView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                     HStack {
-                        Button("Cancel") {
+                        Button("取消") {
                             showPresetSheet = false
                         }
                         .padding()
                         Spacer()
-                        Button("Save") {
+                        Button("保存") {
                             presetManager.addPreset(name: presetName, target: newHKTarget, duration: duration)
                             presetName = ""
                             showPresetSheet = false
