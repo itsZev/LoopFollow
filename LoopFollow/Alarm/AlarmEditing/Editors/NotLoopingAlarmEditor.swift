@@ -21,7 +21,7 @@ struct NotLoopingAlarmEditor: View {
                 header: "No Loop for…",
                 footer: "Number of minutes since the last successful loop. "
                     + "When this time has elapsed, the alarm becomes eligible.",
-                title: "Elapsed time",
+                title: "经过时长",
                 range: 16 ... 61,
                 step: 5,
                 unitLabel: alarm.type.snoozeTimeUnit.label,
@@ -29,10 +29,10 @@ struct NotLoopingAlarmEditor: View {
             )
 
             AlarmBGLimitSection(
-                header: "Low Limit",
+                header: "低血糖阈值",
                 footer: "Alert only if BG is equal to or below this value.",
-                toggleText: "Enable low limit",
-                pickerTitle: "Below",
+                toggleText: "启用下限",
+                pickerTitle: "低于",
                 range: bgRange,
                 defaultOnValue: 100,
                 value: $alarm.belowBG
@@ -42,7 +42,7 @@ struct NotLoopingAlarmEditor: View {
                 header: "High Limit",
                 footer: "Alert only if BG is equal to or above this value.",
                 toggleText: "Enable high limit",
-                pickerTitle: "Above",
+                pickerTitle: "高于",
                 range: bgRange,
                 defaultOnValue: 160,
                 value: $alarm.aboveBG

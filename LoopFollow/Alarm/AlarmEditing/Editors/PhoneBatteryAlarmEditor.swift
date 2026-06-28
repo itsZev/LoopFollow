@@ -16,9 +16,9 @@ struct PhoneBatteryAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Phone Battery Level",
+                header: "手机电量阈值",
                 footer: "This alerts you when the phone battery drops to or below this level.",
-                title: "At or Below",
+                title: "低于等于",
                 range: 0 ... 100,
                 step: 5,
                 unitLabel: "%",

@@ -55,7 +55,7 @@ struct AlarmListView: View {
         List {
             // --- SNOOZED ALARMS SECTION ---
             if !snoozedAlarms.isEmpty {
-                Section(header: Text("Snoozed")) {
+                Section(header: Text("已静音")) {
                     ForEach(snoozedAlarms) { alarm in
                         alarmRow(for: alarm)
                     }
@@ -64,7 +64,7 @@ struct AlarmListView: View {
 
             // --- ACTIVE ALARMS SECTION ---
             if !activeAlarms.isEmpty {
-                Section(header: Text("Active")) {
+                Section(header: Text("已启用")) {
                     ForEach(activeAlarms) { alarm in
                         alarmRow(for: alarm)
                     }
@@ -73,7 +73,7 @@ struct AlarmListView: View {
 
             // --- INACTIVE ALARMS SECTION ---
             if !inactiveAlarms.isEmpty {
-                Section(header: Text("Inactive")) {
+                Section(header: Text("未启用")) {
                     ForEach(inactiveAlarms) { alarm in
                         alarmRow(for: alarm)
                             .opacity(0.6)
@@ -115,7 +115,7 @@ struct AlarmListView: View {
                         HStack(spacing: 4) {
                             Image(systemName: "zzz")
                                 .font(.caption2)
-                            Text("Snoozed until \(until, formatter: timeFormatter)")
+                            Text("已静音 until \(until, formatter: timeFormatter)")
                                 .font(.caption)
                         }
                         .foregroundColor(.secondary)
@@ -173,7 +173,7 @@ struct AlarmListView: View {
                     }
                 )
             } else {
-                Text("Alarm not found").padding()
+                Text("未找到报警").padding()
             }
         }
     }

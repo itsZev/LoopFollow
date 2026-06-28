@@ -55,7 +55,7 @@ struct AlarmSettingsView: View {
                     and shows iOS notifications.
                     """)
                 ) {
-                    Toggle("All Alerts Snoozed", isOn: Binding(
+                    Toggle("全部报警已静音", isOn: Binding(
                         get: {
                             if let until = cfgStore.value.snoozeUntil { return until > Date() }
                             return false
@@ -74,7 +74,7 @@ struct AlarmSettingsView: View {
 
                     if let until = cfgStore.value.snoozeUntil, until > Date() {
                         DatePicker(
-                            "Until",
+                            "截止时间",
                             selection: optDateBinding(
                                 Binding(
                                     get: { cfgStore.value.snoozeUntil },
@@ -86,7 +86,7 @@ struct AlarmSettingsView: View {
                         .datePickerStyle(.compact)
                     }
 
-                    Toggle("All Sounds Muted", isOn: Binding(
+                    Toggle("全部声音已静音", isOn: Binding(
                         get: {
                             if let until = cfgStore.value.muteUntil { return until > Date() }
                             return false
@@ -105,7 +105,7 @@ struct AlarmSettingsView: View {
 
                     if let until = cfgStore.value.muteUntil, until > Date() {
                         DatePicker(
-                            "Until",
+                            "截止时间",
                             selection: optDateBinding(
                                 Binding(
                                     get: { cfgStore.value.muteUntil },
@@ -119,29 +119,29 @@ struct AlarmSettingsView: View {
                 }
 
                 Section(
-                    header: Text("Day / Night Schedule"),
-                    footer: Text("Pick when your day period begins and when your night period begins. " +
-                        "Any time from your Day-starts time up until your Night-starts time will count as day; " +
-                        "from Night-starts until the next Day-starts will count as night.")
+                    header: Text("白天/夜晚时段"),
+                    footer: Text("设置白天和夜晚的开始时间。" +
+                        "「白天开始」到「夜晚开始」之间计为白天;" +
+                        "「夜晚开始」到次日「白天开始」之间计为夜晚。")
                 ) {
                     DatePicker(
-                        "Day starts",
+                        "白天开始",
                         selection: dayBinding,
                         displayedComponents: [.hourAndMinute]
                     )
                     .datePickerStyle(.compact)
 
                     DatePicker(
-                        "Night starts",
+                        "夜晚开始",
                         selection: nightBinding,
                         displayedComponents: [.hourAndMinute]
                     )
                     .datePickerStyle(.compact)
                 }
 
-                Section(header: Text("Alarm Settings")) {
+                Section(header: Text("报警设置")) {
                     Toggle(
-                        "Override System Volume",
+                        "覆盖系统音量",
                         isOn: Binding(
                             get: { cfgStore.value.overrideSystemOutputVolume },
                             set: { cfgStore.value.overrideSystemOutputVolume = $0 }
@@ -150,7 +150,7 @@ struct AlarmSettingsView: View {
 
                     if cfgStore.value.overrideSystemOutputVolume {
                         Stepper(
-                            "Volume Level: \(Int(cfgStore.value.forcedOutputVolume * 100))%",
+                            "音量: \(Int(cfgStore.value.forcedOutputVolume * 100))%",
                             value: Binding(
                                 get: { Double(cfgStore.value.forcedOutputVolume) },
                                 set: { cfgStore.value.forcedOutputVolume = Float($0) }
@@ -161,7 +161,7 @@ struct AlarmSettingsView: View {
                     }
 
                     Toggle(
-                        "Audio During Calls",
+                        "通话时播放报警音",
                         isOn: Binding(
                             get: { cfgStore.value.audioDuringCalls },
                             set: { cfgStore.value.audioDuringCalls = $0 }
@@ -169,7 +169,7 @@ struct AlarmSettingsView: View {
                     )
 
                     Toggle(
-                        "Ignore Zero BG",
+                        "忽略 0 血糖读数",
                         isOn: Binding(
                             get: { cfgStore.value.ignoreZeroBG },
                             set: { cfgStore.value.ignoreZeroBG = $0 }
@@ -177,7 +177,7 @@ struct AlarmSettingsView: View {
                     )
 
                     Toggle(
-                        "Auto‑Snooze CGM Start",
+                        "CGM 启动时自动静音",
                         isOn: Binding(
                             get: { cfgStore.value.autoSnoozeCGMStart },
                             set: { cfgStore.value.autoSnoozeCGMStart = $0 }
@@ -185,7 +185,7 @@ struct AlarmSettingsView: View {
                     )
 
                     Toggle(
-                        "Volume Buttons Snooze Alarms",
+                        "音量键静音报警",
                         isOn: Binding(
                             get: { cfgStore.value.enableVolumeButtonSnooze },
                             set: { cfgStore.value.enableVolumeButtonSnooze = $0 }
@@ -195,6 +195,6 @@ struct AlarmSettingsView: View {
             }
         }
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)
-        .navigationBarTitle("Alarm Settings", displayMode: .inline)
+        .navigationBarTitle("报警设置", displayMode: .inline)
     }
 }

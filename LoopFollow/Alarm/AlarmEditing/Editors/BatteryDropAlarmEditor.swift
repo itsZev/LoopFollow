@@ -16,9 +16,9 @@ struct BatteryDropAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Phone Battery Drop",
+                header: "手机电量下降",
                 footer: "This alerts you if the phone battery drops by this much or more.",
-                title: "Drop Amount",
+                title: "跌幅",
                 range: 5 ... 100,
                 step: 5,
                 unitLabel: "%",
@@ -26,9 +26,9 @@ struct BatteryDropAlarmEditor: View {
             )
 
             AlarmStepperSection(
-                header: "Over This Time",
+                header: "在此时间段内",
                 footer: "How far back to look for that drop.",
-                title: "Time Window",
+                title: "时间窗口",
                 range: 5 ... 30,
                 step: 5,
                 unitLabel: "min",

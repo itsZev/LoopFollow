@@ -16,17 +16,17 @@ struct FastDropAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmBGSection(
-                header: "Rate of Fall",
+                header: "下降速率",
                 footer: "This is how much the glucose must drop to be considered a fast drop.",
-                title: "Falls by",
+                title: "下降幅度",
                 range: 3 ... 54,
                 value: $alarm.delta
             )
 
             AlarmStepperSection(
-                header: "Consecutive Drops",
+                header: "连续下降",
                 footer: "Number of drops—each meeting the rate above—required before an alert fires.",
-                title: "Number of Drops",
+                title: "下降次数",
                 range: 1 ... 3,
                 step: 1,
                 value: $alarm.monitoringWindow

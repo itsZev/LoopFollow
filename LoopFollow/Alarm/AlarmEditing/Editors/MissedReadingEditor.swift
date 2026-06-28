@@ -13,9 +13,9 @@ struct MissedReadingEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Reading Delay",
+                header: "读数延迟",
                 footer: "Choose how long the app should wait before alerting.",
-                title: "No reading for",
+                title: "无读数时长",
                 range: 11 ... 121,
                 step: 5,
                 unitLabel: alarm.type.snoozeTimeUnit.label,

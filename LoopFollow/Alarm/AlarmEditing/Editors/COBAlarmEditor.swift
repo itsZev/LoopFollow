@@ -16,9 +16,9 @@ struct COBAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Carbs-on-Board Limit",
+                header: "活性碳水上限",
                 footer: "Alert when Carbs-on-Board is at or above this number.",
-                title: "At or Above",
+                title: "高于等于",
                 range: 1 ... 200,
                 step: 1,
                 unitLabel: "g",

@@ -19,10 +19,10 @@ struct TemporaryAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmBGLimitSection(
-                header: "Low Limit",
+                header: "低血糖阈值",
                 footer: "Alert if BG is equal to or below this value.",
-                toggleText: "Enable low limit",
-                pickerTitle: "Below",
+                toggleText: "启用下限",
+                pickerTitle: "低于",
                 range: bgRange,
                 value: $alarm.belowBG
             )
@@ -31,7 +31,7 @@ struct TemporaryAlarmEditor: View {
                 header: "High Limit",
                 footer: "Alert if BG is equal to or above this value.",
                 toggleText: "Enable high limit",
-                pickerTitle: "Above",
+                pickerTitle: "高于",
                 range: bgRange,
                 value: $alarm.aboveBG
             )

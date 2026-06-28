@@ -17,17 +17,17 @@ struct IOBAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Boluses Size Limit",
+                header: "注射剂量上限",
                 footer: "This counts only boluses larger than this size.",
-                title: "Above",
+                title: "高于",
                 range: 0.1 ... 20,
                 step: 0.1,
-                unitLabel: "Units",
+                unitLabel: "单位",
                 value: $alarm.delta
             )
 
             AlarmStepperSection(
-                header: "Bolus Count",
+                header: "注射次数",
                 footer: "Number of qualifying boluses needed to trigger.",
                 title: "Count",
                 range: 1 ... 10,
@@ -37,7 +37,7 @@ struct IOBAlarmEditor: View {
             )
 
             AlarmStepperSection(
-                header: "Time Window",
+                header: "时间窗口",
                 footer: "How far back to look for those boluses.",
                 title: "Time",
                 range: 5 ... 120,
@@ -49,10 +49,10 @@ struct IOBAlarmEditor: View {
             AlarmStepperSection(
                 header: "Insulin On Board",
                 footer: "Alert if current IOB or total boluses reach this.",
-                title: "IOB Above",
+                title: "IOB 高于",
                 range: 1 ... 20,
                 step: 0.5,
-                unitLabel: "Units",
+                unitLabel: "单位",
                 value: $alarm.threshold
             )
 

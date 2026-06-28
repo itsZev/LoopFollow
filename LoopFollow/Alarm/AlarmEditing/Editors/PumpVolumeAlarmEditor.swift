@@ -19,10 +19,10 @@ struct PumpVolumeAlarmEditor: View {
                 header: "Trigger Level",
                 footer: "An alert fires once the reservoir is at this value "
                     + "or lower.",
-                title: "Reservoir Below",
+                title: "Reservoir 低于",
                 range: 1 ... 50,
                 step: 1,
-                unitLabel: "Units",
+                unitLabel: "单位",
                 value: $alarm.threshold
             )
 

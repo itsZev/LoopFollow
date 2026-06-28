@@ -18,10 +18,10 @@ struct FutureCarbsAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Max Lookahead",
+                header: "最大预测时长",
                 footer: "Only track carb entries scheduled up to this many minutes " +
                     "in the future. Entries beyond this window are ignored.",
-                title: "Lookahead",
+                title: "预测时长",
                 range: 5 ... 120,
                 step: 5,
                 unitLabel: "min",
@@ -29,9 +29,9 @@ struct FutureCarbsAlarmEditor: View {
             )
 
             AlarmStepperSection(
-                header: "Minimum Carbs",
+                header: "最小碳水",
                 footer: "Ignore carb entries below this amount.",
-                title: "At or Above",
+                title: "高于等于",
                 range: 0 ... 50,
                 step: 1,
                 unitLabel: "g",

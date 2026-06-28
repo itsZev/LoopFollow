@@ -59,11 +59,11 @@ struct AlarmSnoozeSection: View {
                 }
             }
 
-            Toggle("Snoozed", isOn: isSnoozed)
+            Toggle("已静音", isOn: isSnoozed)
 
             if isSnoozed.wrappedValue, let until = alarm.snoozedUntil {
                 DatePicker(
-                    "Until",
+                    "截止时间",
                     selection: Binding(
                         get: { until },
                         set: { alarm.snoozedUntil = $0 }

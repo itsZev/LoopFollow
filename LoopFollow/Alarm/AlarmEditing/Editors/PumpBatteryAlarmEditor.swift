@@ -16,9 +16,9 @@ struct PumpBatteryAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Pump Battery Level",
+                header: "泵电量阈值",
                 footer: "This alerts you when the pump battery drops to or below this level.",
-                title: "At or Below",
+                title: "低于等于",
                 range: 0 ... 100,
                 step: 5,
                 unitLabel: "%",

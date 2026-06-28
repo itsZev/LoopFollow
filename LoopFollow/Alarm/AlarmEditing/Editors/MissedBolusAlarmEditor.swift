@@ -18,10 +18,10 @@ struct MissedBolusAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Delay",
+                header: "延迟",
                 footer: "Minutes to wait after the carb entry before checking " +
                     "for a bolus.",
-                title: "Delay",
+                title: "延迟",
                 range: 5 ... 60,
                 step: 5,
                 unitLabel: "min",
@@ -29,10 +29,10 @@ struct MissedBolusAlarmEditor: View {
             )
 
             AlarmStepperSection(
-                header: "Pre-bolus",
+                header: "预注",
                 footer: "Count boluses given up to this many minutes before " +
                     "the carb entry as valid.",
-                title: "Pre-Bolus Time",
+                title: "预注时间",
                 range: 0 ... 45,
                 step: 5,
                 unitLabel: "min",
@@ -42,17 +42,17 @@ struct MissedBolusAlarmEditor: View {
             AlarmStepperSection(
                 header: "Ignore small boluses",
                 footer: "Boluses at or below this size are ignored.",
-                title: "At or Below",
+                title: "低于等于",
                 range: 0.05 ... 2,
                 step: 0.05,
-                unitLabel: "Units",
+                unitLabel: "单位",
                 value: $alarm.delta
             )
 
             AlarmStepperSection(
                 header: "Ignore small carbs",
                 footer: "Carb entries at or below this amount will not trigger the alarm.",
-                title: "At or Below",
+                title: "低于等于",
                 range: 0 ... 15,
                 step: 1,
                 unitLabel: "Grams",
@@ -63,7 +63,7 @@ struct MissedBolusAlarmEditor: View {
                 header: "Ignore low BG",
                 footer: "Only alert if the current BG is above this value.",
                 toggleText: "Use BG Limit",
-                pickerTitle: "Above",
+                pickerTitle: "高于",
                 range: 40 ... 140,
                 defaultOnValue: 70,
                 value: $alarm.aboveBG

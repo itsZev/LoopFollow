@@ -18,9 +18,9 @@ struct FastRiseAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmBGSection(
-                header: "Rate of Rise",
+                header: "上升速率",
                 footer: "This is how much the glucose must rise to be considered a fast rise.",
-                title: "Rises by",
+                title: "上升幅度",
                 range: 3 ... 54,
                 value: $alarm.delta
             )
@@ -29,7 +29,7 @@ struct FastRiseAlarmEditor: View {
                 header: "Consecutive Rises",
                 footer: "Number of rises—each meeting the rate above—"
                     + "required before an alert fires.",
-                title: "Rises in a row",
+                title: "连续上升",
                 range: 1 ... 3,
                 step: 1,
                 value: $alarm.monitoringWindow

@@ -15,9 +15,9 @@ struct BuildExpireAlarmEditor: View {
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmStepperSection(
-                header: "Notice Period",
+                header: "提醒周期",
                 footer: "Choose how many days of notice you’d like before the build becomes unusable.",
-                title: "Days of notice",
+                title: "提前天数",
                 range: 1 ... 14,
                 step: 1,
                 unitLabel: alarm.type.snoozeTimeUnit.label,

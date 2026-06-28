@@ -9,25 +9,25 @@ struct HighBgAlarmEditor: View {
     var body: some View {
         Group {
             InfoBanner(
-                text: "Alerts when glucose stays above the limit "
-                    + "you set below. Use Persistent if you want to ignore brief spikes."
+                text: "血糖持续高于您在下方设置的阈值"
+                    + "如需忽略短暂波动,请使用「持续」选项。"
             )
 
             AlarmGeneralSection(alarm: $alarm)
 
             AlarmBGSection(
-                header: "High Glucose Limit",
-                footer: "The alert becomes eligible once any reading is at or above this value.",
+                header: "高血糖阈值",
+                footer: "任意一次读数达到或高于此值时,报警生效。",
                 title: "BG",
                 range: 120 ... 350,
                 value: $alarm.aboveBG
             )
 
             AlarmStepperSection(
-                header: "Persistent High",
-                footer: "How long glucose must remain above the threshold before the "
-                    + "alarm actually fires.  Set to 0 for an immediate alert.",
-                title: "Persistent for",
+                header: "持续高血糖",
+                footer: "血糖需持续高于阈值多长时间后,"
+                    + "报警才会触发。设为 0 立即报警。",
+                title: "持续时长",
                 range: 0 ... 120,
                 step: 5,
                 unitLabel: alarm.type.snoozeTimeUnit.label,
