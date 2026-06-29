@@ -14,13 +14,13 @@ struct ContactSettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Contact Integration")) {
-                    Text("Add the contact named '\(viewModel.contactName)' to your watch face to show the current BG value in real time. Make sure to give the app full access to Contacts when prompted.")
+                Section(header: Text("联系人集成")) {
+                    Text("将名为「\(viewModel.contactName)」的联系人添加到表盘,可实时显示当前血糖。请在弹出提示时授予 App 对通讯录的完整访问权限。")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.vertical, 4)
 
-                    Toggle("Enable Contact BG Updates", isOn: $viewModel.contactEnabled)
+                    Toggle("启用联系人血糖更新", isOn: $viewModel.contactEnabled)
                         .toggleStyle(SwitchToggleStyle())
                         .onChange(of: viewModel.contactEnabled) { isEnabled in
                             if isEnabled {
@@ -30,46 +30,46 @@ struct ContactSettingsView: View {
                 }
 
                 if viewModel.contactEnabled {
-                    Section(header: Text("Color Options")) {
-                        Text("Select the colors for your BG values. Note: not all watch faces allow control over colors. Recommend options like Activity or Modular Duo if you want to customize colors.")
+                    Section(header: Text("颜色选项")) {
+                        Text("选择血糖数值的显示颜色。注意:并非所有表盘都支持自定义颜色。如需自定义,推荐使用「体能训练」或「模块化双重」等表盘。")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                             .padding(.vertical, 4)
 
-                        Picker("Background Color", selection: $viewModel.contactBackgroundColor) {
+                        Picker("背景颜色", selection: $viewModel.contactBackgroundColor) {
                             ForEach(ContactColorOption.allCases, id: \.rawValue) { option in
                                 Text(option.rawValue.capitalized).tag(option.rawValue)
                             }
                         }
 
-                        Picker("Color Mode", selection: $viewModel.contactColorMode) {
+                        Picker("颜色模式", selection: $viewModel.contactColorMode) {
                             ForEach(ContactColorMode.allCases, id: \.self) { mode in
                                 Text(mode.displayName).tag(mode)
                             }
                         }
 
                         if viewModel.contactColorMode == .staticColor {
-                            Picker("Text Color", selection: $viewModel.contactTextColor) {
+                            Picker("文字颜色", selection: $viewModel.contactTextColor) {
                                 ForEach(ContactColorOption.allCases, id: \.rawValue) { option in
                                     Text(option.rawValue.capitalized).tag(option.rawValue)
                                 }
                             }
                         } else {
-                            Text("Dynamic mode colors text based on BG range: Green (in range), Yellow (high), Red (low)")
+                            Text("动态模式根据血糖范围着色:绿色(达标)、黄色(偏高)、红色(偏低)")
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
                     }
 
-                    Section(header: Text("Additional Information")) {
-                        Text("To see your trend, delta, or IOB, include them in another contact or create separate contacts. When using 'Include', select which contact to add the value to.")
+                    Section(header: Text("附加信息")) {
+                        Text("要查看趋势、变化量或活性胰岛素,请将其加入其他联系人或创建独立联系人。在「包含」中可选择将数值添加到哪个联系人。")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                             .padding(.vertical, 4)
 
-                        Text("Trend")
+                        Text("趋势")
                             .font(.subheadline)
-                        Picker("Show Trend", selection: $viewModel.contactTrend) {
+                        Picker("显示趋势", selection: $viewModel.contactTrend) {
                             ForEach(ContactIncludeOption.allCases, id: \.self) { option in
                                 Text(option.rawValue).tag(option)
                             }
@@ -77,16 +77,16 @@ struct ContactSettingsView: View {
                         .pickerStyle(SegmentedPickerStyle())
 
                         if viewModel.contactTrend == .include {
-                            Picker("Include Trend in", selection: $viewModel.contactTrendTarget) {
+                            Picker("趋势包含于", selection: $viewModel.contactTrendTarget) {
                                 ForEach(viewModel.availableTargets(for: .Trend), id: \.self) { target in
                                     Text(target.rawValue).tag(target)
                                 }
                             }
                         }
 
-                        Text("Delta")
+                        Text("变化量")
                             .font(.subheadline)
-                        Picker("Show Delta", selection: $viewModel.contactDelta) {
+                        Picker("显示变化量", selection: $viewModel.contactDelta) {
                             ForEach(ContactIncludeOption.allCases, id: \.self) { option in
                                 Text(option.rawValue).tag(option)
                             }
@@ -94,7 +94,7 @@ struct ContactSettingsView: View {
                         .pickerStyle(SegmentedPickerStyle())
 
                         if viewModel.contactDelta == .include {
-                            Picker("Include Delta in", selection: $viewModel.contactDeltaTarget) {
+                            Picker("变化量包含于", selection: $viewModel.contactDeltaTarget) {
                                 ForEach(viewModel.availableTargets(for: .Delta), id: \.self) { target in
                                     Text(target.rawValue).tag(target)
                                 }
@@ -111,7 +111,7 @@ struct ContactSettingsView: View {
                         .pickerStyle(SegmentedPickerStyle())
 
                         if viewModel.contactIOB == .include {
-                            Picker("Include IOB in", selection: $viewModel.contactIOBTarget) {
+                            Picker("活性胰岛素包含于", selection: $viewModel.contactIOBTarget) {
                                 ForEach(viewModel.availableTargets(for: .IOB), id: \.self) { target in
                                     Text(target.rawValue).tag(target)
                                 }
@@ -121,7 +121,7 @@ struct ContactSettingsView: View {
                 }
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("好")))
             }
         }
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)

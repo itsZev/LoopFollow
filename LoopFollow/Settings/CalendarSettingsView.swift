@@ -24,7 +24,7 @@ struct CalendarSettingsView: View {
             Form {
                 // ------------- Calendar write -------------
                 Section {
-                    Toggle("Save BG to Calendar",
+                    Toggle("保存血糖到日历",
                            isOn: $writeCalendarEvent.value)
                         .disabled(accessDenied) // prevent use when no access
                 } footer: {
@@ -38,11 +38,11 @@ struct CalendarSettingsView: View {
 
                 // ------------- Access / calendar picker -------------
                 if accessDenied {
-                    Text("Calendar access denied")
+                    Text("日历 access denied")
                         .foregroundColor(.red)
                 } else {
                     if !calendars.isEmpty {
-                        Picker("Calendar",
+                        Picker("日历",
                                selection: $calendarIdentifier.value)
                         {
                             ForEach(calendars, id: \.calendarIdentifier) { cal in
@@ -53,7 +53,7 @@ struct CalendarSettingsView: View {
                 }
 
                 // ------------- Template lines -------------
-                Section("Calendar Text") {
+                Section("日历文本") {
                     TextField("Line 1", text: $watchLine1.value)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
@@ -64,7 +64,7 @@ struct CalendarSettingsView: View {
                 }
 
                 // ------------- Variable cheat-sheet -------------
-                Section("Available Variables") {
+                Section("可用变量") {
                     ForEach(variableDescriptions, id: \.self) { desc in
                         Text(desc)
                     }
@@ -75,7 +75,7 @@ struct CalendarSettingsView: View {
             }
         }
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)
-        .navigationBarTitle("Calendar", displayMode: .inline)
+        .navigationBarTitle("日历", displayMode: .inline)
     }
 
     // MARK: - Helpers

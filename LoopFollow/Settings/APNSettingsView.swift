@@ -17,7 +17,7 @@ struct APNSettingsView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("LoopFollow APNs Credentials")) {
+            Section(header: Text("LoopFollow APNs 凭证")) {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("APNS Key ID")
@@ -33,7 +33,7 @@ struct APNSettingsView: View {
                         }
                     }
                     if !keyId.isEmpty, !keyIdValid {
-                        Text("Key ID must be exactly 10 uppercase letters or digits.")
+                        Text("Key ID 必须为恰好 10 位大写字母或数字。")
                             .font(.caption)
                             .foregroundColor(.orange)
                     }
@@ -56,7 +56,7 @@ struct APNSettingsView: View {
                     )
                     .frame(minHeight: 110)
                     if !apnsKey.isEmpty, !apnsKeyValid {
-                        Text("Paste the full .p8 contents — must include the BEGIN PRIVATE KEY and END PRIVATE KEY lines.")
+                        Text("粘贴完整的 .p8 文件内容,必须包含 BEGIN PRIVATE KEY 和 END PRIVATE KEY 两行。")
                             .font(.caption)
                             .foregroundColor(.orange)
                     }

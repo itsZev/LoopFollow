@@ -24,11 +24,11 @@ struct UnitsConfigurationView: View {
                 }
             }
 
-            Section("Range") {
-                Picker("Range Mode", selection: $rangeMode) {
+            Section("范围") {
+                Picker("范围 Mode", selection: $rangeMode) {
                     Text("TIR").tag(TimeInRangeDisplayMode.tir)
                     Text("TITR").tag(TimeInRangeDisplayMode.titr)
-                    Text("Custom").tag(TimeInRangeDisplayMode.custom)
+                    Text("自定义").tag(TimeInRangeDisplayMode.custom)
                 }
                 .pickerStyle(.segmented)
                 .onChange(of: rangeMode) { newValue in
@@ -38,7 +38,7 @@ struct UnitsConfigurationView: View {
 
                 if rangeMode == .custom {
                     BGPicker(
-                        title: "Low",
+                        title: "低血糖",
                         range: 40 ... 120,
                         value: $lowValue
                     )
@@ -48,7 +48,7 @@ struct UnitsConfigurationView: View {
                         Observable.shared.chartSettingsChanged.value = true
                     }
                     BGPicker(
-                        title: "High",
+                        title: "高血糖",
                         range: 120 ... 400,
                         value: $highValue
                     )
@@ -60,8 +60,8 @@ struct UnitsConfigurationView: View {
                 }
             }
 
-            Section("Glycemic Metrics") {
-                Picker("Metric", selection: Binding(
+            Section("血糖指标") {
+                Picker("指标", selection: Binding(
                     get: { UnitSettingsStore.shared.glycemicMetricMode },
                     set: { UnitSettingsStore.shared.glycemicMetricMode = $0 }
                 )) {
@@ -70,7 +70,7 @@ struct UnitsConfigurationView: View {
                 }
                 .pickerStyle(.segmented)
 
-                Picker("Output Unit", selection: Binding(
+                Picker("输出单位", selection: Binding(
                     get: { UnitSettingsStore.shared.glycemicOutputUnit },
                     set: { UnitSettingsStore.shared.glycemicOutputUnit = $0 }
                 )) {
@@ -80,13 +80,13 @@ struct UnitsConfigurationView: View {
                 .pickerStyle(.segmented)
             }
 
-            Section("Variability") {
-                Picker("Metric", selection: Binding(
+            Section("波动性") {
+                Picker("指标", selection: Binding(
                     get: { UnitSettingsStore.shared.variabilityMetricMode },
                     set: { UnitSettingsStore.shared.variabilityMetricMode = $0 }
                 )) {
-                    Text("Std Dev").tag(VariabilityMetricMode.stdDeviation)
-                    Text("CV").tag(VariabilityMetricMode.cv)
+                    Text("标准差").tag(VariabilityMetricMode.stdDeviation)
+                    Text("变异系数").tag(VariabilityMetricMode.cv)
                 }
                 .pickerStyle(.segmented)
             }

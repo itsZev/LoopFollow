@@ -27,42 +27,42 @@ struct GraphSettingsView: View {
         NavigationView {
             Form {
                 // ── Graph Display ────────────────────────────────────────────
-                Section("Graph Display") {
-                    Toggle("Display Dots", isOn: $showDots.value)
+                Section("图表显示") {
+                    Toggle("显示 Dots", isOn: $showDots.value)
                         .onChange(of: showDots.value) { _ in markDirty() }
 
-                    Toggle("Display Lines", isOn: $showLines.value)
+                    Toggle("显示 Lines", isOn: $showLines.value)
                         .onChange(of: showLines.value) { _ in markDirty() }
 
                     if nightscoutEnabled {
-                        Toggle("Show DIA Lines", isOn: $showDIALines.value)
+                        Toggle("显示胰岛素作用时间线", isOn: $showDIALines.value)
                             .onChange(of: showDIALines.value) { _ in markDirty() }
 
-                        Toggle("Show −30 min Line", isOn: $show30MinLine.value)
+                        Toggle("显示 −30 分钟线", isOn: $show30MinLine.value)
                             .onChange(of: show30MinLine.value) { _ in markDirty() }
 
-                        Toggle("Show −90 min Line", isOn: $show90MinLine.value)
+                        Toggle("显示 −90 分钟线", isOn: $show90MinLine.value)
                             .onChange(of: show90MinLine.value) { _ in markDirty() }
                     }
 
-                    Toggle("Show Midnight Lines", isOn: $showMidnightLines.value)
+                    Toggle("显示午夜线", isOn: $showMidnightLines.value)
                         .onChange(of: showMidnightLines.value) { _ in markDirty() }
                 }
 
                 // ── Treatments ───────────────────────────────────────────────
                 if nightscoutEnabled {
-                    Section("Treatments") {
-                        Toggle("Show Carb/Bolus Values", isOn: $showValues.value)
-                        Toggle("Show Carb Absorption", isOn: $showAbsorption.value)
-                        Toggle("Treatments on Small Graph",
+                    Section("治疗事件") {
+                        Toggle("显示碳水/大剂量数值", isOn: $showValues.value)
+                        Toggle("显示碳水吸收", isOn: $showAbsorption.value)
+                        Toggle("治疗事件 on 小图表",
                                isOn: $smallGraphTreatments.value)
                     }
                 }
 
                 // ── Small Graph ──────────────────────────────────────────────
-                Section("Small Graph") {
+                Section("小图表") {
                     SettingsStepperRow(
-                        title: "Height",
+                        title: "高度",
                         range: 40 ... 80,
                         step: 5,
                         value: $smallGraphHeight.value,
@@ -73,9 +73,9 @@ struct GraphSettingsView: View {
 
                 // ── Prediction ───────────────────────────────────────────────
                 if nightscoutEnabled {
-                    Section("Prediction") {
+                    Section("预测") {
                         SettingsStepperRow(
-                            title: "Hours of Prediction",
+                            title: "Hours of 预测",
                             range: 0 ... 6,
                             step: 0.25,
                             value: $predictionToLoad.value,
@@ -83,7 +83,7 @@ struct GraphSettingsView: View {
                         )
 
                         if Storage.shared.device.value != "Loop" {
-                            Picker("Prediction Style", selection: $predictionDisplayType.value) {
+                            Picker("预测 Style", selection: $predictionDisplayType.value) {
                                 ForEach(PredictionDisplayType.allCases, id: \.self) { type in
                                     Text(type.displayName).tag(type)
                                 }
@@ -95,9 +95,9 @@ struct GraphSettingsView: View {
 
                 // ── Basal / BG scale ─────────────────────────────────────────
                 if nightscoutEnabled {
-                    Section("Basal / BG Scale") {
+                    Section("基础率/血糖刻度") {
                         SettingsStepperRow(
-                            title: "Min Basal",
+                            title: "最低基础率",
                             range: 0.5 ... 20,
                             step: 0.5,
                             value: $minBasalScale.value,
@@ -105,7 +105,7 @@ struct GraphSettingsView: View {
                         )
 
                         BGPicker(
-                            title: "Min BG Scale",
+                            title: "最低血糖刻度",
                             range: 40 ... 400,
                             value: $minBGScale.value
                         )
@@ -115,9 +115,9 @@ struct GraphSettingsView: View {
 
                 // ── History window ───────────────────────────────────────────
                 if nightscoutEnabled {
-                    Section("History") {
+                    Section("历史") {
                         SettingsStepperRow(
-                            title: "Show Days Back",
+                            title: "回看天数",
                             range: 1 ... 4,
                             step: 1,
                             value: $downloadDays.value,
@@ -128,7 +128,7 @@ struct GraphSettingsView: View {
             }
         }
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)
-        .navigationBarTitle("Graph Settings", displayMode: .inline)
+        .navigationBarTitle("图表设置", displayMode: .inline)
     }
 
     /// Marks the chart as needing a redraw

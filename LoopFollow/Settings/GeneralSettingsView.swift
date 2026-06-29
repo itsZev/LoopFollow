@@ -34,24 +34,24 @@ struct GeneralSettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("App Settings") {
-                    Toggle("Display App Badge", isOn: $appBadge.value)
-                    Toggle("Persistent Notification", isOn: $persistentNotification.value)
+                Section("应用设置") {
+                    Toggle("显示 App Badge", isOn: $appBadge.value)
+                    Toggle("持久通知", isOn: $persistentNotification.value)
                 }
 
-                Section("Display") {
-                    Picker("Appearance", selection: $appearanceMode.value) {
+                Section("显示") {
+                    Picker("外观", selection: $appearanceMode.value) {
                         ForEach(AppearanceMode.allCases, id: \.self) { mode in
                             Text(mode.displayName).tag(mode)
                         }
                     }
-                    Toggle("Display Stats", isOn: $showStats.value)
-                    Toggle("Display Small Graph", isOn: $showSmallGraph.value)
-                    Toggle("Color BG Text", isOn: $colorBGText.value)
-                    Toggle("Keep Screen Active", isOn: $screenlockSwitchState.value)
-                    Toggle("Show Display Name", isOn: $showDisplayName.value)
-                    Toggle("Snoozer emoji", isOn: $snoozerEmoji.value)
-                    Toggle("Force portrait mode", isOn: $forcePortraitMode.value)
+                    Toggle("显示 Stats", isOn: $showStats.value)
+                    Toggle("显示 小图表", isOn: $showSmallGraph.value)
+                    Toggle("血糖文字着色", isOn: $colorBGText.value)
+                    Toggle("保持屏幕常亮", isOn: $screenlockSwitchState.value)
+                    Toggle("Show 显示 Name", isOn: $showDisplayName.value)
+                    Toggle("贪睡器表情", isOn: $snoozerEmoji.value)
+                    Toggle("强制竖屏", isOn: $forcePortraitMode.value)
                         .onChange(of: forcePortraitMode.value) { _ in
                             let window = UIApplication.shared.connectedScenes
                                 .compactMap { $0 as? UIWindowScene }
@@ -62,12 +62,12 @@ struct GeneralSettingsView: View {
                         }
                 }
 
-                Section("Time Zone") {
-                    Toggle("Time Zone Override", isOn: $graphTimeZoneEnabled.value)
+                Section("时区") {
+                    Toggle("时区 Override", isOn: $graphTimeZoneEnabled.value)
                         .onChange(of: graphTimeZoneEnabled.value) { _ in markChartSettingsDirty() }
 
                     if graphTimeZoneEnabled.value {
-                        Picker("Time Zone", selection: $graphTimeZoneIdentifier.value) {
+                        Picker("时区", selection: $graphTimeZoneIdentifier.value) {
                             ForEach(Self.sortedTimeZones, id: \.identifier) { tz in
                                 Text(Self.timeZoneLabel(tz)).tag(tz.identifier)
                             }
@@ -76,11 +76,11 @@ struct GeneralSettingsView: View {
                     }
                 }
 
-                Section("Speak BG") {
-                    Toggle("Speak BG", isOn: $speakBG.value.animation())
+                Section("语音播报血糖") {
+                    Toggle("语音播报血糖", isOn: $speakBG.value.animation())
 
                     if speakBG.value {
-                        Picker("Language", selection: $speakLanguage.value) {
+                        Picker("语言", selection: $speakLanguage.value) {
                             Text("English").tag("en")
                             Text("French").tag("fr")
                             Text("Italian").tag("it")
@@ -89,17 +89,17 @@ struct GeneralSettingsView: View {
                             Text("中文").tag("zh")
                         }
 
-                        Toggle("Always", isOn: $speakBGAlways.value.animation())
+                        Toggle("始终", isOn: $speakBGAlways.value.animation())
 
                         if !speakBGAlways.value {
-                            Toggle("Low", isOn: $speakLowBG.value.animation())
+                            Toggle("低血糖", isOn: $speakLowBG.value.animation())
                                 .onChange(of: speakLowBG.value) { newValue in
                                     if newValue {
                                         speakProactiveLowBG.value = false
                                     }
                                 }
 
-                            Toggle("Proactive Low", isOn: $speakProactiveLowBG.value.animation())
+                            Toggle("主动低血糖预警", isOn: $speakProactiveLowBG.value.animation())
                                 .onChange(of: speakProactiveLowBG.value) { newValue in
                                     if newValue {
                                         speakLowBG.value = false
@@ -108,7 +108,7 @@ struct GeneralSettingsView: View {
 
                             if speakLowBG.value || speakProactiveLowBG.value {
                                 BGPicker(
-                                    title: "Low BG Limit",
+                                    title: "低血糖 BG Limit",
                                     range: 40 ... 108,
                                     value: $speakLowBGLimit.value
                                 )
@@ -116,17 +116,17 @@ struct GeneralSettingsView: View {
 
                             if speakProactiveLowBG.value {
                                 BGPicker(
-                                    title: "Fast Drop Delta",
+                                    title: "快速下降变化量",
                                     range: 3 ... 20,
                                     value: $speakFastDropDelta.value
                                 )
                             }
 
-                            Toggle("High", isOn: $speakHighBG.value.animation())
+                            Toggle("高血糖", isOn: $speakHighBG.value.animation())
 
                             if speakHighBG.value {
                                 BGPicker(
-                                    title: "High BG Limit",
+                                    title: "高血糖 BG Limit",
                                     range: 140 ... 300,
                                     value: $speakHighBGLimit.value
                                 )
@@ -135,20 +135,20 @@ struct GeneralSettingsView: View {
                     }
                 }
 
-                Section("Diagnostics") {
-                    Toggle("Send anonymous usage stats", isOn: $telemetryEnabled.value)
+                Section("诊断") {
+                    Toggle("发送匿名使用统计", isOn: $telemetryEnabled.value)
                         .onChange(of: telemetryEnabled.value) { newValue in
                             if newValue {
                                 TelemetryClient.shared.scheduleRecurring()
                             }
                         }
-                    NavigationLink("What's sent") { TelemetryPreviewView() }
-                    NavigationLink("Privacy") { TelemetryPrivacyView() }
+                    NavigationLink("发送内容") { TelemetryPreviewView() }
+                    NavigationLink("隐私") { TelemetryPrivacyView() }
                 }
             }
         }
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)
-        .navigationBarTitle("General Settings", displayMode: .inline)
+        .navigationBarTitle("通用设置", displayMode: .inline)
     }
 
     private func markChartSettingsDirty() {

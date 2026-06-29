@@ -161,7 +161,7 @@ struct TabCustomizationModal: View {
                     persistTabOrder(tabItemsOnly)
                 }
             } header: {
-                Text("Tab Order")
+                Text("标签页顺序")
             }
         }
         .listStyle(.insetGrouped)
@@ -197,10 +197,10 @@ struct SettingsRow: View {
             Image(systemName: "line.3.horizontal")
                 .frame(width: 28)
                 .foregroundColor(.secondary)
-            Text("Menu")
+            Text("菜单")
                 .foregroundColor(.secondary)
             Spacer()
-            Text("Tab 5")
+            Text("标签页 5")
                 .font(.caption)
                 .foregroundColor(.white)
                 .padding(.horizontal, 8)
@@ -239,7 +239,7 @@ struct TabItemRow: View {
                     .background(Color.accentColor)
                     .cornerRadius(4)
             } else {
-                Text("In Menu")
+                Text("在菜单中")
                     .font(.caption)
                     .foregroundColor(.orange)
                     .padding(.horizontal, 8)

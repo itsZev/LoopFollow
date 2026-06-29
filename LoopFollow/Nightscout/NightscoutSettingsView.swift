@@ -28,7 +28,7 @@ struct NightscoutSettingsView: View {
                 dismiss()
             }
         }
-        .navigationBarTitle("Nightscout Settings", displayMode: .inline)
+        .navigationBarTitle("Nightscout 设置", displayMode: .inline)
         .navigationBarBackButtonHidden(usesModalCloseButton)
         .preferredColorScheme(Storage.shared.appearanceMode.value.colorScheme)
     }
@@ -36,8 +36,8 @@ struct NightscoutSettingsView: View {
     // MARK: - Subviews / Computed Properties
 
     private var urlSection: some View {
-        Section(header: Text("URL")) {
-            TextField("Enter URL", text: $viewModel.nightscoutURL)
+        Section(header: Text("网址")) {
+            TextField("输入网址", text: $viewModel.nightscoutURL)
                 .textContentType(.username)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
@@ -48,11 +48,11 @@ struct NightscoutSettingsView: View {
     }
 
     private var tokenSection: some View {
-        Section(header: Text("Token")) {
+        Section(header: Text("令牌")) {
             HStack {
-                Text("Access Token")
+                Text("访问令牌")
                 TogglableSecureInput(
-                    placeholder: "Enter Token",
+                    placeholder: "输入令牌",
                     text: $viewModel.nightscoutToken,
                     style: .singleLine,
                     textContentType: .password
@@ -62,7 +62,7 @@ struct NightscoutSettingsView: View {
     }
 
     private var statusSection: some View {
-        Section(header: Text("Status")) {
+        Section(header: Text("状态")) {
             HStack {
                 Text(viewModel.nightscoutStatus)
                 if viewModel.isConnected {
@@ -85,7 +85,7 @@ struct NightscoutSettingsView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Continue")
+                    Text("继续")
                         .fontWeight(.semibold)
                     Spacer()
                 }
@@ -97,13 +97,13 @@ struct NightscoutSettingsView: View {
     }
 
     private var importSection: some View {
-        Section(header: Text("Import Settings")) {
+        Section(header: Text("导入设置")) {
             if let onImportSettings {
                 Button(action: onImportSettings) {
                     HStack {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundColor(.blue)
-                        Text("Import Settings from QR Code")
+                        Text("从二维码导入设置")
                             .foregroundColor(.primary)
                     }
                 }
@@ -112,7 +112,7 @@ struct NightscoutSettingsView: View {
                     HStack {
                         Image(systemName: "square.and.arrow.down")
                             .foregroundColor(.blue)
-                        Text("Import Settings from QR Code")
+                        Text("从二维码导入设置")
                     }
                 }
             }
